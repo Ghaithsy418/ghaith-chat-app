@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { z } from "zod";
 import InputField from "../_components/ui/InputField";
 import SubmitButton from "../_components/ui/SubmitButton";
-import { signin } from "../_lib/actions";
+import { login } from "../_lib/actions";
 import { useFormValidation } from "../_hooks/useFormValidation";
 import { TbMoodLookDown, TbMoodLookLeft } from "react-icons/tb";
 import { motion } from "framer-motion";
@@ -18,23 +18,15 @@ function SigninForm() {
   const [showPassword, setShowPassword] = useState(true);
   const { errors, validateForm } = useFormValidation(signinSchema);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target as HTMLFormElement);
+  const handleSubmit = async (formData: FormData) => {
     const data = {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     };
 
     const result = validateForm(data);
-
     if (result.success) {
-      try {
-        await signin(formData);
-      } catch (error) {
-        console.error("Signin error:", error);
-      }
+      await login(formData);
     }
   };
 
@@ -43,7 +35,7 @@ function SigninForm() {
       variants={variants}
       animate="visible"
       initial="hidden"
-      onSubmit={handleSubmit}
+      action={handleSubmit}
       className="flex flex-col items-center justify-center gap-8"
     >
       <InputField label="Email" name="email" error={errors.email} />
@@ -51,7 +43,7 @@ function SigninForm() {
         <InputField
           label="Password"
           name="password"
-          type={showPassword ? "text" : "password"}
+          type={!showPassword ? "text" : "password"}
           error={errors.password}
         />
         <span

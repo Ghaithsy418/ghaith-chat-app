@@ -1,8 +1,9 @@
 "use server";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "./firebase";
 import { doc, setDoc } from "firebase/firestore";
+
 
 export async function signup(formData: FormData) {
   const { name, email, password } = Object.fromEntries(formData);
@@ -25,6 +26,7 @@ export async function signup(formData: FormData) {
   });
 }
 
-export async function signin(formData: FormData) {
-  console.log(formData);
+export async function login(formData: FormData) {
+    const { email, password } = Object.fromEntries(formData);
+    await signInWithEmailAndPassword(auth, email as string, password as string);
 }
