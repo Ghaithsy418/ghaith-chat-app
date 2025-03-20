@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "appwrite": "^17.0.1",
     "emoji-picker-react": "^4.12.2",
     "firebase": "^11.4.0",
     "framer-motion": "^12.5.0",
