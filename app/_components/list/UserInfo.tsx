@@ -1,12 +1,20 @@
-import Image from "next/image";
-import React from "react";
+"use client";
+
+import { iconClassName } from "@/app/_helpers/classNames";
+import { logout } from "@/app/_lib/actions";
 import avatar from "@/public/avatar.png";
-import { HiOutlineVideoCamera } from "react-icons/hi2";
-import { HiDotsHorizontal, HiOutlinePencilAlt } from "react-icons/hi";
-import { iconClassName } from "@/app/utils/classNames";
+import Image from "next/image";
+import { CgLogOut } from "react-icons/cg";
+import { HiOutlineCog6Tooth } from "react-icons/hi2";
+import GeneralMenu from "../ui/GeneralMenu";
+import toast from "react-hot-toast";
 
+async function handleLogout() {
+  await logout();
+  toast.success("Logged out successfully");
+}
 
-function UserInfo() {
+const UserInfo: React.FC<{ name: string }> = function ({ name }) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center justify-center gap-4">
@@ -18,15 +26,20 @@ function UserInfo() {
           placeholder="blur"
           className="rounded-full object-cover"
         />
-        <h3>Ghaith Shabakji</h3>
+        <h3>{name}</h3>
       </div>
       <div className="flex items-center justify-center gap-4">
-        <HiDotsHorizontal className={iconClassName} />
-        <HiOutlineVideoCamera className={iconClassName} />
-        <HiOutlinePencilAlt className={iconClassName} />
+        <GeneralMenu />
+        <HiOutlineCog6Tooth
+          className={`${iconClassName} hover:rotate-[-180deg]`}
+        />
+        <CgLogOut
+          onClick={handleLogout}
+          className={`${iconClassName} hover:border-b-2 hover:border-b-red-500 hover:text-red-500`}
+        />
       </div>
     </div>
   );
-}
+};
 
 export default UserInfo;

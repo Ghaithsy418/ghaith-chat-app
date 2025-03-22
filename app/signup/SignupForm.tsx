@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { z } from "zod";
 import InputField from "../_components/ui/InputField";
 import SubmitButton from "../_components/ui/SubmitButton";
-import { signup } from "../_lib/actions";
 import { useFormValidation } from "../_hooks/useFormValidation";
 import { TbMoodLookDown, TbMoodLookLeft } from "react-icons/tb";
 import { motion } from "framer-motion";
+import { signup } from "../_lib/actions";
 
 const signupSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
@@ -46,6 +46,7 @@ function SignupForm() {
         <InputField
           label="Password"
           name="password"
+          autoComplete="off"
           type={showPassword ? "password" : "text"}
           error={errors.password}
         />

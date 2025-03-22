@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { z } from "zod";
 import InputField from "../_components/ui/InputField";
 import SubmitButton from "../_components/ui/SubmitButton";
-import { login } from "../_lib/actions";
 import { useFormValidation } from "../_hooks/useFormValidation";
 import { TbMoodLookDown, TbMoodLookLeft } from "react-icons/tb";
 import { motion } from "framer-motion";
+import { login } from "../_lib/actions";
 
 const signinSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -43,6 +43,7 @@ function SigninForm() {
         <InputField
           label="Password"
           name="password"
+          autoComplete="off"
           type={!showPassword ? "text" : "password"}
           error={errors.password}
         />

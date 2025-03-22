@@ -1,5 +1,5 @@
 "use client";
-import { iconClassName } from "@/app/utils/classNames";
+import { iconClassName } from "@/app/_helpers/classNames";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import React, { Dispatch, SetStateAction } from "react";
 import { LuSticker } from "react-icons/lu";

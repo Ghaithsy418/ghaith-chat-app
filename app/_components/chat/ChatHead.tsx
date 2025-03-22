@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import avatar from "@/public/avatar.png";
-import { iconClassName } from "@/app/utils/classNames";
+import { iconClassName } from "@/app/_helpers/classNames";
 import {
   HiMiniPhone,
   HiMiniVideoCamera,
@@ -28,7 +28,7 @@ function ChatHead() {
           </p>
         </div>
       </div>
-      <div className="flex gap-5 items-center justify-center">
+      <div className="flex items-center justify-center gap-5">
         <HiMiniPhone className={iconClassName} />
         <HiMiniVideoCamera className={iconClassName} />
         <HiOutlineInformationCircle className={iconClassName} />

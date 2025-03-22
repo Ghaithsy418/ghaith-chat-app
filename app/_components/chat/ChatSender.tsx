@@ -1,6 +1,8 @@
 "use client";
 
-import { iconClassName } from "@/app/utils/classNames";
+import { iconClassName } from "@/app/_helpers/classNames";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   HiOutlineCamera,
   HiOutlineMicrophone,
@@ -8,12 +10,12 @@ import {
 } from "react-icons/hi2";
 import { RiSendPlaneFill } from "react-icons/ri";
 import EmojisPicker from "./EmojisPicker";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { sendMessage } from "@/app/_lib/actions";
 
 function ChatSender() {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+
   return (
     <div className="flex h-16 items-center gap-5 border-t-1 border-indigo-100/30 bg-slate-950/30 px-2 transition-all duration-300">
       <EmojisPicker setText={setText} open={open} setOpen={setOpen} />
@@ -32,8 +34,12 @@ function ChatSender() {
       </div>
       {text && (
         <motion.span
-          initial={{ opacity: 0}}
-          animate={{ opacity: 1, transition: {duration: 1} }}
+          onClick={async () => {
+            await sendMessage(text);
+            setText("");
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1 } }}
           className="flex cursor-pointer items-center rounded-full bg-indigo-500 p-2 transition-all duration-300 hover:bg-indigo-50 hover:text-indigo-500"
         >
           <RiSendPlaneFill className="h-7 w-7" />

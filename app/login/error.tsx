@@ -4,7 +4,7 @@ const error: React.FC<{ error: Error; reset: () => void }> = function ({
   reset,
 }) {
   return (
-    <div className="bg-main flex h-[60vh] w-[40vw] flex-col items-center justify-center gap-5 rounded-lg border-2 border-indigo-300/20">
+    <div className="bg-main flex h-[60vh] w-[40rem] flex-col items-center justify-center gap-5 rounded-lg border-2 border-indigo-300/20">
       <h2 className="text-2xl font-bold text-indigo-100">
         Something Went Wrong while logging in :(
       </h2>

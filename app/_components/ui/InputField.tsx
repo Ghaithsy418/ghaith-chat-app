@@ -5,9 +5,10 @@ interface InputFieldProps {
   name: string;
   type?: string;
   error?: string;
+  autoComplete?: string
 }
 
-function InputField({ label, name, type = "text", error }: InputFieldProps) {
+function InputField({ label, name, type = "text", error, autoComplete = "on" }: InputFieldProps) {
   return (
     <div className="w-[400px]">
       <div className="relative w-full">
@@ -16,6 +17,7 @@ function InputField({ label, name, type = "text", error }: InputFieldProps) {
           name={name}
           id={name}
           placeholder=" "
+          autoComplete={autoComplete}
           className={`peer w-full rounded-lg bg-slate-950/40 py-2 px-3 focus:outline-3 focus:outline-slate-800/80 focus:outline-offset-1 ${
             error ? "border border-red-500" : ""
           }`}

@@ -1,23 +1,22 @@
 "use client";
 
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { ReactNode, useEffect } from "react";
+import toast from "react-hot-toast";
 
 interface WrapperTypes {
   children: ReactNode;
   className: string;
 }
 
-const WrapperComponent: React.FC<WrapperTypes> = function ({ children, className = "" }) {
-    const app = useRef<HTMLDivElement | null>(null);
-    useEffect(function(){
-        if(app.current){
-          app.current.addEventListener("contextmenu",function(e: MouseEvent){
-            e.preventDefault();
-          })
-        }
-    },[])
+const WrapperComponent: React.FC<WrapperTypes> = function ({
+  children,
+  className = "",
+}) {
+  useEffect(function () {
+    toast.success("Welcome :)");
+  }, []);
 
-  return <div ref={app} className={className}>{children}</div>;
+  return <div className={className}>{children}</div>;
 };
 
 export default WrapperComponent;

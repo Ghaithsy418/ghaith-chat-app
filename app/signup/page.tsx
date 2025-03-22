@@ -2,10 +2,11 @@
 import Link from "next/link";
 import LoginAndSignupTemp from "../_components/ui/LoginAndSignupTemp";
 import SignupForm from "./SignupForm";
+import GoogleLogin from "../_components/ui/GoogleLogin";
 
 export const metadata = {
-  title: "Sign up"
-}
+  title: "Sign up",
+};
 
 function page() {
   return (
@@ -29,14 +30,7 @@ function page() {
           <span>or</span>
           <hr className="mb-2 w-44" />
         </div>
-        <button className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-sm bg-slate-900/50 px-4 py-2.5 transition-all duration-300 hover:bg-slate-700/50">
-          <img
-            src="https://authjs.dev/img/providers/google.svg"
-            alt="google logo"
-            className="h-6"
-          />
-          <span>Sign in with Google</span>
-        </button>
+        <GoogleLogin />
       </div>
     </LoginAndSignupTemp>
   );
