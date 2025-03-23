@@ -11,6 +11,7 @@ import React, {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
 
 const menuContext = createContext<menuTypes | null>(null);
 
@@ -73,13 +74,15 @@ function List(props: toggleAndListTypes) {
   const ref = useClickOutside(close, false);
   if (isOpen !== id) return null;
   return createPortal(
-    <div
+    <motion.div
       ref={ref}
+      initial={{ opacity: 0, transition: { duration: 0.6 } }}
+      animate={{ opacity: 1 }}
       className={`absolute flex flex-col divide-y-1 divide-gray-400 rounded-md bg-gray-200/80 text-slate-900 shadow-md`}
       style={{ top: `${position.y}px`, right: `${position.x}px` }}
     >
       {children}
-    </div>,
+    </motion.div>,
     document.body,
   );
 }

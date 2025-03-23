@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import LoginAndSignupTemp from "../_components/ui/LoginAndSignupTemp";
 import SignupForm from "./SignupForm";

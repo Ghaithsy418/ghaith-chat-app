@@ -1,3 +1,5 @@
+"use server"
+import { getCurrUser } from "../_helpers/getCurrUser";
 import supabase from "./supabse";
 
 export async function getUser() {
@@ -10,4 +12,52 @@ export async function getUser() {
     const err = error as Error;
     throw new Error(err.message);
   }
+}
+export async function fetchUsers(email: string){
+  const { data: users, error } = await supabase
+    .from('users')
+    .select("*")
+    .eq("email", email)
+
+  if (error) throw new Error(error.message);
+
+  const user = await getCurrUser();
+  const filteredUsers = users?.filter((data)=> data.email !== user.email)
+
+  return filteredUsers;
+}
+
+export async function getFriends(){
+  const user = await getCurrUser();
+
+  const { data: friends, error } = await supabase
+    .from('friends')
+    .select("*, friend:friend_id(id, display_name, email)")
+    .eq("user_id", user.id);
+
+  if(error) throw new Error(error.message);
+
+  const { data: friendsOf, error: error2 } = await supabase
+    .from('friends')
+    .select("*, user:user_id(id, display_name, email)")
+    .eq("friend_id", user.id);
+
+  if(error2) throw new Error(error2.message);
+
+  const allFriends = [
+    ...(friends?.map(f => ({
+      id: f.friend.id,
+      display_name: f.friend.display_name,
+      email: f.friend.email,
+      friendship_id: f.id
+    })) || []),
+    ...(friendsOf?.map(f => ({
+      id: f.user.id,
+      display_name: f.user.display_name,
+      email: f.user.email,
+      friendship_id: f.id
+    })) || [])
+  ];
+
+  return allFriends;
 }

@@ -1,13 +1,13 @@
-import React from "react";
+import { getFriends } from "@/app/_lib/api";
 import ChatItem from "./ChatItem";
 
-function ChatList() {
+async function ChatList() {
+  const friends = await getFriends();
   return (
-    <div className="flex-4/5 scrollbar overflow-auto">
-      <ChatItem />
-      <ChatItem />
-      <ChatItem />
-      <ChatItem />
+    <div className="scrollbar flex-4/5 overflow-auto">
+      {friends.map((friend) => (
+        <ChatItem key={friend.id} id={friend.id} name={friend.display_name} />
+      ))}
     </div>
   );
 }

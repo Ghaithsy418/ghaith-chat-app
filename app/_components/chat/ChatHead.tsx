@@ -7,11 +7,13 @@ import {
   HiMiniVideoCamera,
   HiOutlineInformationCircle,
 } from "react-icons/hi2";
+import BackArrow from "./BackArrow";
 
 function ChatHead() {
   return (
     <div className="flex h-20 items-center justify-between border-b-1 border-indigo-100/30 px-4">
-      <div className="flex gap-5">
+      <div className="flex items-center justify-center gap-5">
+        <BackArrow />
         <div>
           <Image
             src={avatar}

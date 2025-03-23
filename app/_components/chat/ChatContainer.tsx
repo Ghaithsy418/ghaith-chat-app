@@ -2,10 +2,8 @@ import OtherMessage from "./OtherMessage";
 import SelfMessage from "./SelfMessage";
 
 function ChatContainer() {
-  
-
   return (
-    <div className="scrollbar relative flex flex-1 flex-col-reverse gap-5 overflow-auto px-3 py-4 text-sm leading-6">
+    <div className="scrollbar relative flex flex-1 flex-col-reverse gap-5 overflow-scroll px-3 py-4 text-sm leading-6">
       <SelfMessage>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis
         odio perferendis nihil ea quidem cum animi, tempora nam pariatur

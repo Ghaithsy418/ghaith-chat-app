@@ -1,9 +1,10 @@
 "use server";
 import { redirect } from "next/navigation";
 import supabase from "./supabse";
-import { getUser } from "./api";
+import { getFriends, getUser } from "./api";
 import { cookies } from "next/headers";
 import { getCurrUser } from "../_helpers/getCurrUser";
+import { revalidatePath } from "next/cache";
 
 export async function signup(formData: FormData) {
   const { name, email, password } = Object.fromEntries(formData);
@@ -75,4 +76,15 @@ export async function sendMessage(text: string){
   const user = await getCurrUser();
   const {error} = await supabase.from("messages").insert({text, send_by: user?.id})
   if(error) throw new Error(error.message)
+}
+
+export async function addFriend(id: string){
+  const user = await getCurrUser();
+  const friends = await getFriends();
+  const isAFriend = friends.some((friend)=> friend.id === id );
+  if(isAFriend) {return false;}
+  const {error} = await supabase.from("friends").insert([{user_id: user?.id, friend_id: id}])
+  if(error) throw new Error(error.message)
+
+  revalidatePath("/");
 }

@@ -3,6 +3,7 @@
 import { HiSearch } from "react-icons/hi";
 import { HiPlus } from "react-icons/hi2";
 import Modal from "../ui/Modal";
+import AddUser from "./AddUser";
 
 function Search() {
   return (
@@ -22,7 +23,7 @@ function Search() {
           </span>
         </Modal.Open>
         <Modal.Window name="addFriend">
-          <p>Hello World!</p>
+          <AddUser />
         </Modal.Window>
       </Modal>
     </div>
