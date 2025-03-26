@@ -10,21 +10,21 @@ import {
 } from "react";
 
 interface contextType {
-  friend: string;
-  setFriend: Dispatch<SetStateAction<string>>;
+  friend: { friendId: string; friendName: string };
+  setFriend: Dispatch<SetStateAction<{ friendName: string; friendId: string }>>;
   search: string;
   setSearch: Dispatch<SetStateAction<string>>;
 }
 
 const ChattingContext = createContext<contextType>({
-  friend: "",
+  friend: { friendId: "", friendName: "" },
   setFriend: () => {},
   search: "",
   setSearch: () => {},
 });
 
 function ChattingProvider({ children }: { children: ReactNode }) {
-  const [friend, setFriend] = useState("");
+  const [friend, setFriend] = useState({ friendId: "", friendName: "" });
   const [search, setSearch] = useState("");
 
   return (

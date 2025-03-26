@@ -4,11 +4,38 @@ import { useChatting } from "@/app/_context/useChatting";
 import ChatContainer from "./ChatContainer";
 import ChatHead from "./ChatHead";
 import ChatSender from "./ChatSender";
-import { Suspense } from "react";
+import { useEffect, useOptimistic, useState, useTransition } from "react";
 import Spinner from "../ui/Spinner";
+import { getMessages } from "@/app/_lib/actions";
 
-function Chat() {
+interface messagesType {
+  created_at: string;
+  text: string;
+  send_by: string;
+  send_to: string;
+  is_edit: boolean;
+}
+
+function Chat({ userId }: { userId: string }) {
   const { friend } = useChatting();
+  const [messages, setMessages] = useState<messagesType[]>([]);
+  const [isPending, startTransition] = useTransition();
+  const [messagesOptimistic, addMessage] = useOptimistic(
+    messages,
+    (currMessages, newMessage) => [...currMessages, newMessage as messagesType],
+  );
+  useEffect(
+    function () {
+      async function getTheMessages() {
+        startTransition(async () => {
+          const data = await getMessages(friend.friendId);
+          setMessages(data || []);
+        });
+      }
+      getTheMessages();
+    },
+    [friend],
+  );
   return (
     <div className="flex h-full flex-2 flex-col border-r-1 border-l-1 border-gray-300/30">
       {!friend && (
@@ -23,13 +50,19 @@ function Chat() {
           </p>
         </div>
       )}
-      {friend !== "" && (
+      {friend.friendName !== "" && (
         <>
           <ChatHead />
-          <Suspense fallback={<Spinner className="" />}>
-            <ChatContainer />
-          </Suspense>
-          <ChatSender />
+
+          {isPending ? (
+            <Spinner className="mx-auto my-auto" />
+          ) : (
+            <ChatContainer
+              setMessages={setMessages}
+              messages={messagesOptimistic}
+            />
+          )}
+          <ChatSender addMessage={addMessage} userId={userId} />
         </>
       )}
     </div>

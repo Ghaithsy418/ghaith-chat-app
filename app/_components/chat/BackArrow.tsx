@@ -6,7 +6,10 @@ import { MdOutlineKeyboardBackspace } from "react-icons/md";
 function BackArrow() {
   const { setFriend } = useChatting();
   return (
-    <span onClick={() => setFriend("")} className="rounded-full text-2xl">
+    <span
+      onClick={() => setFriend({ friendId: "", friendName: "" })}
+      className="rounded-full text-2xl"
+    >
       <MdOutlineKeyboardBackspace className="durtion-300 cursor-pointer transition-all hover:text-indigo-400" />
     </span>
   );

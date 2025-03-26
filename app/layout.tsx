@@ -30,20 +30,20 @@ export default function RootLayout({
       <body
         className={`${cabin.className} bg-background flex h-screen items-center justify-center bg-[url(../public/bg.jpg)] text-gray-100 antialiased`}
       >
-          <SettingsProvider>
-            <ChattingProvider>{children}</ChattingProvider>
-          </SettingsProvider>
-          <Toaster
-            gutter={8}
-            toastOptions={{
-              success: { duration: 3000 },
-              style: {
-                backgroundColor: "var(--color-indigo-100)",
-                color: "var(--color-slate-900)",
-                padding: "0.6rem",
-              },
-            }}
-          />
+        <SettingsProvider>
+          <ChattingProvider>{children}</ChattingProvider>
+        </SettingsProvider>
+        <Toaster
+          gutter={8}
+          toastOptions={{
+            success: { duration: 3000 },
+            style: {
+              backgroundColor: "var(--color-indigo-100)",
+              color: "var(--color-slate-900)",
+              padding: "0.6rem",
+            },
+          }}
+        />
       </body>
     </html>
   );

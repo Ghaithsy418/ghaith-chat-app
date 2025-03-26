@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { format } from "date-fns";
 import React, { ReactNode } from "react";
+import InitialAvatarFriends from "../ui/InitialAvatarFriends";
 
 interface MessageTypes {
   image?: string;
@@ -15,7 +16,7 @@ const OtherMessage: React.FC<MessageTypes> = function ({
 }) {
   return (
     <div className="flex max-w-[70%] gap-2">
-      <img src="./avatar.png" alt="avatar" className="h-8 w-8 rounded-full" />
+      <InitialAvatarFriends className="h-6 w-6 p-4 text-sm" />
       <div className="flex flex-col gap-1">
         {image && (
           <img

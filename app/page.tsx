@@ -12,7 +12,7 @@ async function page() {
     <main>
       <WrapperComponent className="bg-main flex h-[90vh] w-[90vw] rounded-lg border-2 border-indigo-300/20">
         <List />
-        <Chat />
+        <Chat userId={user.id} />
         <Details />
       </WrapperComponent>
     </main>

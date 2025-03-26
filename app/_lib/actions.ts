@@ -82,11 +82,12 @@ export async function addFriend(id: string){
   const user = await getCurrUser();
   const friends = await getFriends();
   const isAFriend = friends.some((friend)=> friend.id === id );
-  if(isAFriend) {return false;}
+  if(isAFriend) return false
   const {error} = await supabase.from("friends").insert([{user_id: user?.id, friend_id: id}])
   if(error) throw new Error(error.message)
 
   revalidatePath("/");
+  return true;
 }
 
 export async function getMessages(friend: string){
@@ -94,7 +95,7 @@ export async function getMessages(friend: string){
   
   const { data, error } = await supabase
     .from("messages")
-    .select("*")
+    .select("text, send_by, send_to, created_at, is_edit")
     .or(`and(send_by.eq.${user.id},send_to.eq.${friend}),and(send_by.eq.${friend},send_to.eq.${user.id})`)
     .order("created_at", { ascending: false });
   

@@ -1,8 +1,10 @@
 "use client";
 
+import { useChatting } from "@/app/_context/useChatting";
 import { iconClassName } from "@/app/_helpers/classNames";
+import { sendMessage } from "@/app/_lib/actions";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import {
   HiOutlineCamera,
   HiOutlineMicrophone,
@@ -10,12 +12,17 @@ import {
 } from "react-icons/hi2";
 import { RiSendPlaneFill } from "react-icons/ri";
 import EmojisPicker from "./EmojisPicker";
-import { sendMessage } from "@/app/_lib/actions";
-import { useChatting } from "@/app/_context/useChatting";
 
-function ChatSender() {
+function ChatSender({
+  addMessage,
+  userId,
+}: {
+  addMessage: (action: unknown) => void;
+  userId: string;
+}) {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+  const [isPending, startTransition] = useTransition();
   const { friend } = useChatting();
 
   return (
@@ -23,8 +30,17 @@ function ChatSender() {
       onSubmit={async (e) => {
         e.preventDefault();
         if (text !== "") {
-          setText("");
-          await sendMessage(text, friend);
+          startTransition(async () => {
+            setText("");
+            addMessage({
+              text,
+              created_at: Date.now(),
+              send_by: userId,
+              send_to: friend,
+              isEdit: false,
+            });
+            await sendMessage(text, friend.friendId);
+          });
         }
       }}
     >
@@ -35,6 +51,7 @@ function ChatSender() {
           placeholder="type a message..."
           className="h-full flex-1 border-0 p-2 text-lg focus:border-0 focus:outline-0"
           value={text}
+          disabled={isPending}
           onChange={(e) => setText(e.target.value)}
           onClick={() => setOpen(false)}
         />
