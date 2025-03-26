@@ -1,13 +1,9 @@
-import Image from "next/image";
-import React from "react";
-import avatar from "@/public/avatar.png";
 import { iconClassName } from "@/app/_helpers/classNames";
-import {
-  HiMiniPhone,
-  HiMiniVideoCamera,
-  HiOutlineInformationCircle,
-} from "react-icons/hi2";
+import avatar from "@/public/avatar.png";
+import Image from "next/image";
+import { HiMiniPhone, HiMiniVideoCamera } from "react-icons/hi2";
 import BackArrow from "./BackArrow";
+import InfoButton from "./InfoButton";
 
 function ChatHead() {
   return (
@@ -33,7 +29,7 @@ function ChatHead() {
       <div className="flex items-center justify-center gap-5">
         <HiMiniPhone className={iconClassName} />
         <HiMiniVideoCamera className={iconClassName} />
-        <HiOutlineInformationCircle className={iconClassName} />
+        <InfoButton />
       </div>
     </div>
   );

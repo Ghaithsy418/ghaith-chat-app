@@ -5,15 +5,14 @@ import List from "./_components/list/List";
 import WrapperComponent from "./_components/ui/WrapperComponent";
 import { getCurrUser } from "./_helpers/getCurrUser";
 
-async function page({ searchParams }: { searchParams: { num: string } }) {
+async function page() {
   const user = await getCurrUser();
   if (!user) redirect("/login");
-  const { num } = await searchParams;
   return (
     <main>
       <WrapperComponent className="bg-main flex h-[90vh] w-[90vw] rounded-lg border-2 border-indigo-300/20">
         <List />
-        <Chat id={num} />
+        <Chat />
         <Details />
       </WrapperComponent>
     </main>

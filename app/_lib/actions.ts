@@ -1,6 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
-import supabase from "./supabse";
+import supabase from "./supabase";
 import { getFriends, getUser } from "./api";
 import { cookies } from "next/headers";
 import { getCurrUser } from "../_helpers/getCurrUser";
@@ -72,9 +72,9 @@ export async function logout() {
   cookieStore.delete("user");
 }
 
-export async function sendMessage(text: string){
+export async function sendMessage(text: string, friendId: string){
   const user = await getCurrUser();
-  const {error} = await supabase.from("messages").insert({text, send_by: user?.id})
+  const {error} = await supabase.from("messages").insert({text, send_by: user?.id, send_to: friendId})
   if(error) throw new Error(error.message)
 }
 
@@ -87,4 +87,18 @@ export async function addFriend(id: string){
   if(error) throw new Error(error.message)
 
   revalidatePath("/");
+}
+
+export async function getMessages(friend: string){
+  const user = await getCurrUser();
+  
+  const { data, error } = await supabase
+    .from("messages")
+    .select("*")
+    .or(`and(send_by.eq.${user.id},send_to.eq.${friend}),and(send_by.eq.${friend},send_to.eq.${user.id})`)
+    .order("created_at", { ascending: false });
+  
+  if(error) throw new Error(error.message);
+  
+  return data || [];
 }

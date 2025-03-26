@@ -1,6 +1,6 @@
 "use client";
 
-import { useOpenChat } from "@/app/_hooks/useOpenChat";
+import { useChatting } from "@/app/_context/useChatting";
 import avatar from "@/public/avatar.png";
 import Image from "next/image";
 
@@ -10,11 +10,12 @@ interface chatTypes {
 }
 
 function ChatItem(props: chatTypes) {
-  const handleChangeUrl = useOpenChat();
+  const { setFriend } = useChatting();
+
   return (
     <div
-      onClick={() => handleChangeUrl(props.id)}
-      className="flex cursor-pointer items-center gap-5 border-b-1 border-indigo-100/30 p-4 transition-all duration-300 hover:border-indigo-100/0 hover:bg-indigo-50/20"
+      onClick={() => setFriend(props.id)}
+      className={`flex cursor-pointer items-center gap-5 border-b-1 border-indigo-100/30 p-4 transition-all duration-300 hover:border-indigo-100/0 hover:bg-indigo-50/20`}
     >
       <div>
         <Image

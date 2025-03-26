@@ -8,6 +8,7 @@ import { CgLogOut } from "react-icons/cg";
 import { HiOutlineCog6Tooth } from "react-icons/hi2";
 import GeneralMenu from "../ui/GeneralMenu";
 import toast from "react-hot-toast";
+import { useSettings } from "@/app/_context/useSettings";
 
 async function handleLogout() {
   await logout();
@@ -15,6 +16,7 @@ async function handleLogout() {
 }
 
 const UserInfo: React.FC<{ name: string }> = function ({ name }) {
+  const { currRightWindow, dispatch } = useSettings();
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center justify-center gap-4">
@@ -31,6 +33,12 @@ const UserInfo: React.FC<{ name: string }> = function ({ name }) {
       <div className="flex items-center justify-center gap-4">
         <GeneralMenu />
         <HiOutlineCog6Tooth
+          onClick={() =>
+            dispatch({
+              type: "currWindowIs",
+              payload: currRightWindow === "settings" ? "" : "settings",
+            })
+          }
           className={`${iconClassName} hover:rotate-[-180deg]`}
         />
         <CgLogOut

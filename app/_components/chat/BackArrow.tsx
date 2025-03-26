@@ -1,12 +1,12 @@
 "use client";
 
-import { useOpenChat } from "@/app/_hooks/useOpenChat";
+import { useChatting } from "@/app/_context/useChatting";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 
 function BackArrow() {
-  const handleChangeUrl = useOpenChat();
+  const { setFriend } = useChatting();
   return (
-    <span onClick={() => handleChangeUrl("")} className="rounded-full text-2xl">
+    <span onClick={() => setFriend("")} className="rounded-full text-2xl">
       <MdOutlineKeyboardBackspace className="durtion-300 cursor-pointer transition-all hover:text-indigo-400" />
     </span>
   );

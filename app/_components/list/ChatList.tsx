@@ -1,11 +1,25 @@
-import { getFriends } from "@/app/_lib/api";
+"use client";
+import { useChatting } from "@/app/_context/useChatting";
 import ChatItem from "./ChatItem";
 
-async function ChatList() {
-  const friends = await getFriends();
+interface Friends {
+  id: string;
+  display_name: string;
+}
+
+function ChatList({ friends }: { friends: Friends[] }) {
+  const { search } = useChatting();
+
+  const newArr =
+    search === ""
+      ? friends
+      : friends.filter((friend) =>
+          friend.display_name.toLocaleLowerCase().includes(search),
+        );
+
   return (
     <div className="scrollbar flex-4/5 overflow-auto">
-      {friends.map((friend) => (
+      {newArr?.map((friend) => (
         <ChatItem key={friend.id} id={friend.id} name={friend.display_name} />
       ))}
     </div>

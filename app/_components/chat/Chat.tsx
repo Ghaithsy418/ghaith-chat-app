@@ -1,11 +1,17 @@
+"use client";
+
+import { useChatting } from "@/app/_context/useChatting";
 import ChatContainer from "./ChatContainer";
 import ChatHead from "./ChatHead";
 import ChatSender from "./ChatSender";
+import { Suspense } from "react";
+import Spinner from "../ui/Spinner";
 
-function Chat({ id }: { id: string }) {
+function Chat() {
+  const { friend } = useChatting();
   return (
     <div className="flex h-full flex-2 flex-col border-r-1 border-l-1 border-gray-300/30">
-      {!id && (
+      {!friend && (
         <div className="my-auto flex flex-col items-center justify-center gap-4 bg-linear-to-br from-indigo-50/80 via-indigo-100/80 to-indigo-200/80 bg-clip-text text-3xl font-bold tracking-wide text-transparent">
           <h2>
             Start Chatting By adding someone first{" "}
@@ -17,10 +23,12 @@ function Chat({ id }: { id: string }) {
           </p>
         </div>
       )}
-      {id && (
+      {friend !== "" && (
         <>
           <ChatHead />
-          <ChatContainer />
+          <Suspense fallback={<Spinner className="" />}>
+            <ChatContainer />
+          </Suspense>
           <ChatSender />
         </>
       )}

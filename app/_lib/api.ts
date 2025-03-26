@@ -1,6 +1,6 @@
 "use server"
 import { getCurrUser } from "../_helpers/getCurrUser";
-import supabase from "./supabse";
+import supabase from "./supabase";
 
 export async function getUser() {
   try {

@@ -2,13 +2,15 @@ import { Suspense } from "react";
 import ChatList from "./ChatList";
 import ListHead from "./ListHead";
 import Spinner from "../ui/Spinner";
+import { getFriends } from "@/app/_lib/api";
 
-function List() {
+async function List() {
+  const friends = await getFriends();
   return (
     <div className="flex flex-1 flex-col justify-center py-4">
       <ListHead />
       <Suspense fallback={<Spinner className="mx-auto mb-[80%]" />}>
-        <ChatList />
+        <ChatList friends={friends} />
       </Suspense>
     </div>
   );
