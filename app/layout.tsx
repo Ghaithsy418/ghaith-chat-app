@@ -4,6 +4,8 @@ import { Toaster } from "react-hot-toast";
 import { ChattingProvider } from "./_context/useChatting";
 import { SettingsProvider } from "./_context/useSettings";
 import "./globals.css";
+import { getLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 const cabin = Cabin({
   variable: "--font-cabin",
@@ -20,19 +22,22 @@ export const metadata: Metadata = {
   authors: [{ name: "Ghaith Shabakji" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   return (
-    <html lang="en">
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body
-        className={`${cabin.className} bg-background flex h-screen items-center justify-center bg-[url(../public/bg.jpg)] text-gray-100 antialiased`}
+        className={`${cabin.className} bg-background flex h-screen items-center justify-center bg-[url(../public/background.jpg)] bg-cover text-gray-100 antialiased`}
       >
-        <SettingsProvider>
-          <ChattingProvider>{children}</ChattingProvider>
-        </SettingsProvider>
+        <NextIntlClientProvider locale={locale}>
+          <SettingsProvider>
+            <ChattingProvider>{children}</ChattingProvider>
+          </SettingsProvider>
+        </NextIntlClientProvider>
         <Toaster
           gutter={8}
           toastOptions={{

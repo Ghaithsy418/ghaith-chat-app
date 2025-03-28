@@ -26,7 +26,7 @@ const OtherMessage: React.FC<MessageTypes> = function ({
           />
         )}
         <p className="rounded-lg bg-slate-950/60 p-2">{children}</p>
-        <span className="mr-2 place-self-end text-[11px] font-bold">
+        <span className="place-self-end text-[11px] font-bold ltr:mr-2 rtl:ml-2">
           {format(time, "p")}
         </span>
       </div>

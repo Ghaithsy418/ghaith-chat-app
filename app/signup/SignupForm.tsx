@@ -8,6 +8,7 @@ import { useFormValidation } from "../_hooks/useFormValidation";
 import { TbMoodLookDown, TbMoodLookLeft } from "react-icons/tb";
 import { motion } from "framer-motion";
 import { signup } from "../_lib/actions";
+import { useTranslations } from "next-intl";
 
 const signupSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
@@ -18,6 +19,7 @@ const signupSchema = z.object({
 function SignupForm() {
   const [showPassword, setShowPassword] = useState(true);
   const { errors, validateForm } = useFormValidation(signupSchema);
+  const t = useTranslations("signup");
 
   const handleSubmit = async (formData: FormData) => {
     const data = {
@@ -40,11 +42,11 @@ function SignupForm() {
       action={handleSubmit}
       className="flex flex-col items-center justify-center gap-8"
     >
-      <InputField label="Full Name" name="name" error={errors.name} />
-      <InputField label="Email" name="email" error={errors.email} />
+      <InputField label={t("name")} name="name" error={errors.name} />
+      <InputField label={t("email")} name="email" error={errors.email} />
       <div className="relative w-full">
         <InputField
-          label="Password"
+          label={t("password")}
           name="password"
           autoComplete="off"
           type={showPassword ? "password" : "text"}
@@ -52,12 +54,14 @@ function SignupForm() {
         />
         <span
           onClick={() => setShowPassword((show) => !show)}
-          className="absolute top-2 right-4 cursor-pointer text-2xl text-indigo-50 transition-all duration-300 hover:text-indigo-500"
+          className="absolute top-2 cursor-pointer text-2xl text-indigo-50 transition-all duration-300 hover:text-indigo-500 ltr:right-4 rtl:left-4"
         >
           {showPassword ? <TbMoodLookDown /> : <TbMoodLookLeft />}
         </span>
       </div>
-      <SubmitButton loadingText="Signing up...">Sign up</SubmitButton>
+      <SubmitButton loadingText={t("signupLoading")}>
+        {t("signup")}
+      </SubmitButton>
     </motion.form>
   );
 }

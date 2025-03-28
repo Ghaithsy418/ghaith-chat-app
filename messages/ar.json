@@ -1,0 +1,45 @@
+{
+  "searchBar": {
+    "placeholder": "ابحث..."
+  },
+  "sendingMessages": {
+    "placeholder": "اكتب رسالة..."
+  },
+  "addingUsers": {
+    "button": "ابحث",
+    "searchPlaceholder": "ابحث عن مستخدم بكتابة بريده الإلكتروني",
+    "initialMessage": "لا أصدقاء بعد؟؟ ابدأ بالبحث عن صديق",
+    "addingButton": "إضافة"
+  },
+  "userInfos": {
+    "chat": "إعدادات المحادثة",
+    "privacy": "الخصوصية و المساعدة",
+    "photos": "الصور المرسلة",
+    "files": "الملفات المرسلة",
+    "blockUser": "حظر المستخدم"
+  },
+  "login": {
+    "title": "مرحباً بعودتك",
+    "subTitle": "من فضلك سجل دخول لاستخدام التطبيق",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "login": "تسجيل الدخول",
+    "loginLoading": "يتم تسجل الدخول...",
+    "dontHave": "أليس لديك حساب بعد؟",
+    "signup": "سجل الآن",
+    "or": "أو",
+    "loginGoogle": "سجل دخولك مع Google"
+  },
+  "signup": {
+    "title": "سجل حساب جديد",
+    "subTitle": "رحلتك تبدأ هنا",
+    "name": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "signup": "تسجيل حساب جديد",
+    "signupLoading": "جارٍ التسجيل",
+    "haveAcc": "لديك حساب بالفعل؟",
+    "login": "سجل دخولك الآن",
+    "or": "أو"
+  }
+}

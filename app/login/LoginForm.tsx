@@ -8,15 +8,17 @@ import { useFormValidation } from "../_hooks/useFormValidation";
 import { TbMoodLookDown, TbMoodLookLeft } from "react-icons/tb";
 import { motion } from "framer-motion";
 import { login } from "../_lib/actions";
+import { useTranslations } from "next-intl";
 
 const signinSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
-function SigninForm() {
+function LoginForm() {
   const [showPassword, setShowPassword] = useState(true);
   const { errors, validateForm } = useFormValidation(signinSchema);
+  const t = useTranslations("login");
 
   const handleSubmit = async (formData: FormData) => {
     const data = {
@@ -38,10 +40,10 @@ function SigninForm() {
       action={handleSubmit}
       className="flex flex-col items-center justify-center gap-8"
     >
-      <InputField label="Email" name="email" error={errors.email} />
+      <InputField label={t("email")} name="email" error={errors.email} />
       <div className="relative w-full">
         <InputField
-          label="Password"
+          label={t("password")}
           name="password"
           autoComplete="off"
           type={!showPassword ? "text" : "password"}
@@ -49,12 +51,12 @@ function SigninForm() {
         />
         <span
           onClick={() => setShowPassword((show) => !show)}
-          className="absolute top-2 right-4 cursor-pointer text-2xl text-indigo-50 transition-all duration-300 hover:text-indigo-500"
+          className="absolute top-2 cursor-pointer text-2xl text-indigo-50 transition-all duration-300 hover:text-indigo-500 ltr:right-4 rtl:left-4"
         >
           {showPassword ? <TbMoodLookDown /> : <TbMoodLookLeft />}
         </span>
       </div>
-      <SubmitButton loadingText="Signing in...">Sign in</SubmitButton>
+      <SubmitButton loadingText={t("loginLoading")}>{t("login")}</SubmitButton>
     </motion.form>
   );
 }
@@ -73,4 +75,4 @@ const variants = {
   },
 };
 
-export default SigninForm;
+export default LoginForm;

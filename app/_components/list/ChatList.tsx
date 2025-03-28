@@ -14,7 +14,9 @@ function ChatList({ friends }: { friends: Friends[] }) {
     search === ""
       ? friends
       : friends.filter((friend) =>
-          friend.display_name.toLocaleLowerCase().includes(search),
+          friend.display_name
+            .toLocaleLowerCase()
+            .includes(search.toLowerCase()),
         );
 
   return (

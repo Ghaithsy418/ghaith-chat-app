@@ -1,0 +1,45 @@
+{
+  "searchBar": {
+    "placeholder": "search..."
+  },
+  "sendingMessages": {
+    "placeholder": "Type a message..."
+  },
+  "addingUsers": {
+    "button": "Search",
+    "searchPlaceholder": "Search for a user using his email",
+    "initialMessage": "No Friends yet?? try to search for a Friend :)",
+    "addingButton": "Add"
+  },
+  "userInfos": {
+    "chat": "Chat settings",
+    "privacy": "Privacy and Help",
+    "photos": "Shared Photos",
+    "files": "Shared Files",
+    "blockUser": "Block User"
+  },
+  "login": {
+    "title": "Welcome Back!",
+    "subTitle": "Please Login to start using the application",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "loginLoading": "Logging in...",
+    "dontHave": "Don't have an account?",
+    "signup": "Signup",
+    "or": "or",
+    "loginGoogle": "Login with Google"
+  },
+  "signup": {
+    "title": "Signup",
+    "subTitle": "Your Journey will start here!",
+    "name": "Full Name",
+    "email": "email",
+    "password": "password",
+    "signup": "Sign up",
+    "signupLoading": "Signing up...",
+    "haveAcc": "You have an account?",
+    "login": "Login",
+    "or": "or"
+  }
+}

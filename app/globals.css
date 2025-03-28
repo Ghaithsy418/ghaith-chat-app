@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
-@layer components{
-  .bg-main{
+@layer components {
+  .bg-main {
     background-color: rgba(32, 39, 88, 0.793);
-    backdrop-filter: blur(19px) saturate(180%);
+    backdrop-filter: blur(10px) saturate(120%);
   }
 
-  .scrollbar{
+  .scrollbar {
     scrollbar-width: thin;
     scrollbar-color: var(--color-indigo-200) transparent;
   }
@@ -16,13 +16,13 @@
     height: 48px;
     border-radius: 50%;
     display: inline-block;
-    border-top: 4px solid #FFF;
+    border-top: 4px solid #fff;
     border-right: 4px solid transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
   }
   .loader::after {
-    content: '';  
+    content: "";
     box-sizing: border-box;
     position: absolute;
     left: 0;
@@ -40,5 +40,5 @@
     100% {
       transform: rotate(360deg);
     }
-  } 
+  }
 }

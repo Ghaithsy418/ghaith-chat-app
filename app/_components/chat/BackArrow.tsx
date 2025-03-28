@@ -1,16 +1,28 @@
 "use client";
 
 import { useChatting } from "@/app/_context/useChatting";
-import { MdOutlineKeyboardBackspace } from "react-icons/md";
+import { useSettings } from "@/app/_context/useSettings";
+import { useLocale } from "next-intl";
+import { HiMiniArrowLongLeft, HiMiniArrowLongRight } from "react-icons/hi2";
 
 function BackArrow() {
   const { setFriend } = useChatting();
+  const { currRightWindow, dispatch } = useSettings();
+  const locale = useLocale();
+
+  function handleClick() {
+    setFriend({ friendId: "", friendName: "" });
+    if (currRightWindow === "infos")
+      dispatch({ type: "currWindowIs", payload: "" });
+  }
+
   return (
-    <span
-      onClick={() => setFriend({ friendId: "", friendName: "" })}
-      className="rounded-full text-2xl"
-    >
-      <MdOutlineKeyboardBackspace className="durtion-300 cursor-pointer transition-all hover:text-indigo-400" />
+    <span onClick={handleClick} className="rounded-full text-2xl">
+      {locale === "ar" ? (
+        <HiMiniArrowLongRight className="durtion-300 cursor-pointer transition-all hover:text-indigo-400" />
+      ) : (
+        <HiMiniArrowLongLeft className="durtion-300 cursor-pointer transition-all hover:text-indigo-400" />
+      )}
     </span>
   );
 }

@@ -35,7 +35,7 @@ function ChatContainer({
   );
 
   return (
-    <div className="scrollbar relative flex flex-1 flex-col-reverse gap-5 overflow-scroll px-3 py-4 text-sm leading-6">
+    <div className="scrollbar text-md relative flex flex-1 flex-col-reverse gap-5 overflow-scroll px-3 py-4 leading-6">
       {messages?.map((message, index) => {
         if (message.send_by === friend.friendId)
           return (

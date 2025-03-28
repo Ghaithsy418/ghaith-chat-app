@@ -22,7 +22,9 @@ const SelfMessage: React.FC<MessageTypes> = function ({
         />
       )}
       <p className="rounded-lg bg-indigo-400/80 p-3">{children}</p>
-      <span className="ml-2 text-[11px] font-bold">{format(time, "p")}</span>
+      <span className="text-[11px] font-bold ltr:ml-2 rtl:mr-2">
+        {format(time, "p")}
+      </span>
     </div>
   );
 };
