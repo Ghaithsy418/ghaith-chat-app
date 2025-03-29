@@ -4,6 +4,7 @@ import { HiMiniPhone, HiMiniVideoCamera } from "react-icons/hi2";
 import InitialAvatarFriends from "../ui/InitialAvatarFriends";
 import BackArrow from "./BackArrow";
 import InfoButton from "./InfoButton";
+import ReusableImage from "../ui/ReusableAvatar";
 
 function ChatHead() {
   const { friend } = useChatting();
@@ -12,7 +13,16 @@ function ChatHead() {
       <div className="flex items-center justify-center gap-5">
         <BackArrow />
         <div>
-          <InitialAvatarFriends className="h-12 w-12 p-1.5 text-xl" />
+          {friend.friendAvatar && (
+            <ReusableImage
+              display_name={friend.friendName}
+              avatar_url={friend.friendAvatar}
+              className="h-12 w-12"
+            />
+          )}
+          {!friend.friendAvatar && (
+            <InitialAvatarFriends className="h-12 w-12 p-1.5 text-xl" />
+          )}
         </div>
         <div>
           <h2 className="text-md font-semibold">{friend.friendName}</h2>

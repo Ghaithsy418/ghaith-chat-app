@@ -5,6 +5,7 @@ import ChatItem from "./ChatItem";
 interface Friends {
   id: string;
   display_name: string;
+  avatar_url: string;
 }
 
 function ChatList({ friends }: { friends: Friends[] }) {
@@ -22,7 +23,12 @@ function ChatList({ friends }: { friends: Friends[] }) {
   return (
     <div className="scrollbar flex-4/5 overflow-auto">
       {newArr?.map((friend) => (
-        <ChatItem key={friend.id} id={friend.id} name={friend.display_name} />
+        <ChatItem
+          key={friend.id}
+          id={friend.id}
+          name={friend.display_name}
+          avatar={friend.avatar_url}
+        />
       ))}
     </div>
   );

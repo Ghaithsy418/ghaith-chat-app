@@ -32,14 +32,14 @@ export async function getFriends(){
 
   const { data: friends, error } = await supabase
     .from('friends')
-    .select("*, friend:friend_id(id, display_name, email)")
+    .select("*, friend:friend_id(id, display_name, email, avatar_url)")
     .eq("user_id", user.id);
 
   if(error) throw new Error(error.message);
 
   const { data: friendsOf, error: error2 } = await supabase
     .from('friends')
-    .select("*, user:user_id(id, display_name, email)")
+    .select("*, user:user_id(id, display_name, email, avatar_url)")
     .eq("friend_id", user.id);
 
   if(error2) throw new Error(error2.message);
@@ -49,13 +49,13 @@ export async function getFriends(){
       id: f.friend.id,
       display_name: f.friend.display_name,
       email: f.friend.email,
-      friendship_id: f.id
+      avatar_url: f.friend.avatar_url,
     })) || []),
     ...(friendsOf?.map(f => ({
       id: f.user.id,
       display_name: f.user.display_name,
       email: f.user.email,
-      friendship_id: f.id
+      avatar_url: f.user.avatar_url,
     })) || [])
   ];
 

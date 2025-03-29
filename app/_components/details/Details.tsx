@@ -1,7 +1,7 @@
 "use client";
 
 import { useSettings } from "@/app/_context/useSettings";
-import AppSettings from "./AppSettings";
+import AppSettings from "./settings/AppSettings";
 import FriendDetails from "./FriendDetails";
 
 function Details() {

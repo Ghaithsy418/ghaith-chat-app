@@ -1,7 +1,10 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
 import { format } from "date-fns";
 import React, { ReactNode } from "react";
 import InitialAvatarFriends from "../ui/InitialAvatarFriends";
+import { useChatting } from "@/app/_context/useChatting";
+import ReusableImage from "../ui/ReusableAvatar";
 
 interface MessageTypes {
   image?: string;
@@ -14,9 +17,19 @@ const OtherMessage: React.FC<MessageTypes> = function ({
   image,
   time,
 }) {
+  const { friend } = useChatting();
   return (
     <div className="flex max-w-[70%] gap-2">
-      <InitialAvatarFriends className="h-6 w-6 p-4 text-sm" />
+      {friend.friendAvatar && (
+        <ReusableImage
+          className="h-8 w-8"
+          avatar_url={friend.friendAvatar}
+          display_name={friend.friendName}
+        />
+      )}
+      {!friend.friendAvatar && (
+        <InitialAvatarFriends className="h-8 w-8 p-4 text-sm" />
+      )}
       <div className="flex flex-col gap-1">
         {image && (
           <img

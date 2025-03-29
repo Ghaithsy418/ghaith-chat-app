@@ -6,6 +6,7 @@ import { SettingsProvider } from "./_context/useSettings";
 import "./globals.css";
 import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { UserProvider } from "./_context/useCurrUser";
 
 const cabin = Cabin({
   variable: "--font-cabin",
@@ -34,9 +35,11 @@ export default async function RootLayout({
         className={`${cabin.className} bg-background flex h-screen items-center justify-center bg-[url(../public/background.jpg)] bg-cover text-gray-100 antialiased`}
       >
         <NextIntlClientProvider locale={locale}>
-          <SettingsProvider>
-            <ChattingProvider>{children}</ChattingProvider>
-          </SettingsProvider>
+          <UserProvider>
+            <SettingsProvider>
+              <ChattingProvider>{children}</ChattingProvider>
+            </SettingsProvider>
+          </UserProvider>
         </NextIntlClientProvider>
         <Toaster
           gutter={8}

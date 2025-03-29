@@ -103,3 +103,21 @@ export async function getMessages(friend: string){
   
   return data || [];
 }
+
+export async function uploadAvatar(image: File){
+  const user = await getCurrUser();
+  const url = `avatar${user.id}${Math.random()*1000}`
+  const {error} = await supabase.storage.from("avatars").upload(url, image);
+  if(error) throw new Error(error.message);
+
+  const {error: error2} = await supabase.from("users").update({avatar_url: url}).eq("id",user.id)
+  if(error2) throw new Error(error2.message)
+  revalidatePath("/");
+}
+
+export async function getUserByEmail(email :string){
+  const {data, error} = await supabase.from('users').select().eq("email",email);
+  if(error) throw new Error(error.message);
+
+  return data
+}
