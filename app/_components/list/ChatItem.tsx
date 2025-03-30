@@ -8,6 +8,7 @@ interface chatTypes {
   name: string;
   id: string;
   avatar: string;
+  status: string;
 }
 
 function ChatItem(props: chatTypes) {
@@ -19,6 +20,7 @@ function ChatItem(props: chatTypes) {
           friendId: props.id,
           friendName: props.name,
           friendAvatar: props.avatar,
+          friendStatus: props.status,
         })
       }
       className={`flex cursor-pointer items-center gap-5 border-b-1 border-indigo-100/30 p-4 transition-all duration-300 hover:border-indigo-100/0 hover:bg-indigo-50/20 ${friend.friendId === props.id ? "bg-indigo-200/20" : ""} `}

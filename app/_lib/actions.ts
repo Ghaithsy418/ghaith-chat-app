@@ -121,3 +121,16 @@ export async function getUserByEmail(email :string){
 
   return data
 }
+
+export async function updateProfile( email:string,formData: FormData){
+  const {name, status} = Object.fromEntries(formData);
+
+  const { error } = await supabase
+  .from('users')
+  .update({ display_name: name, status })
+  .eq('email', email)
+
+  if(error) throw new Error(error.message);
+
+  revalidatePath("/");
+}

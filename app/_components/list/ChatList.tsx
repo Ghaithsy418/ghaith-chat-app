@@ -6,6 +6,7 @@ interface Friends {
   id: string;
   display_name: string;
   avatar_url: string;
+  status: string;
 }
 
 function ChatList({ friends }: { friends: Friends[] }) {
@@ -28,6 +29,7 @@ function ChatList({ friends }: { friends: Friends[] }) {
           id={friend.id}
           name={friend.display_name}
           avatar={friend.avatar_url}
+          status={friend.status}
         />
       ))}
     </div>

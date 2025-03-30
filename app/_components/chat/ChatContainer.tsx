@@ -5,6 +5,8 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import OtherMessage from "./OtherMessage";
 import SelfMessage from "./SelfMessage";
 import { useChatting } from "@/app/_context/useChatting";
+import { useSettings } from "@/app/_context/useSettings";
+import Cookie from "js-cookie";
 
 function ChatContainer({
   messages,
@@ -14,6 +16,18 @@ function ChatContainer({
   setMessages: Dispatch<SetStateAction<messagesType[]>>;
 }) {
   const { friend } = useChatting();
+  const { fontSize, dispatch } = useSettings();
+
+  useEffect(
+    function () {
+      dispatch({
+        type: "changeFontSize",
+        payload: Cookie.get("fontSize") || "md",
+      });
+    },
+    [dispatch],
+  );
+
   useEffect(
     function () {
       const channel = supabase
@@ -35,7 +49,9 @@ function ChatContainer({
   );
 
   return (
-    <div className="scrollbar text-md relative flex flex-1 flex-col-reverse gap-5 overflow-scroll px-3 py-4 leading-6">
+    <div
+      className={`scrollbar ${fontSize ? `text-${fontSize}` : "text-md"} relative flex flex-1 flex-col-reverse gap-5 overflow-scroll px-3 py-4 leading-6`}
+    >
       {messages?.map((message, index) => {
         if (message.send_by === friend.friendId)
           return (

@@ -13,6 +13,7 @@ interface WrapperTypes {
     display_name: string;
     email: string;
     avatar_url: string;
+    status: string;
     id: string;
   };
 }
@@ -34,6 +35,7 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
         email: user.email,
         display_name: user.display_name,
         avatar_url: user.avatar_url,
+        status: user.status,
       });
     },
     [user, setUser],

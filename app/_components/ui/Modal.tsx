@@ -47,13 +47,17 @@ const Window: React.FC<windowType> = function ({ children, name }) {
   if (isOpen !== name) return null;
 
   return createPortal(
-    <motion.div initial={{opacity: 0}} animate={{opacity: 1}} className="absolute top-0 left-0 flex h-[100vh] w-[100vw] items-center justify-center bg-slate-950/80 backdrop:blur-md">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="absolute top-0 left-0 flex h-[100vh] w-[100vw] items-center justify-center bg-slate-950/80 backdrop-blur-xs backdrop:blur-md"
+    >
       <motion.div
         variants={variants}
         initial="hidden"
         animate="visible"
         ref={ref}
-        className="bg-main fixed top-[40%] left-[50%] flex min-w-[30rem] flex-1 translate-[-50%] flex-col gap-5 rounded-lg border-2 border-indigo-300/20 p-5 shadow-lg shadow-indigo-100/10"
+        className="bg-main fixed mb-20 flex min-w-[30rem] flex-1 flex-col gap-5 rounded-lg border-2 border-indigo-300/20 p-5 shadow-lg shadow-indigo-100/10"
       >
         <button
           className="cursor-pointer place-self-end rounded-full p-2 text-2xl transition-all duration-300 hover:bg-slate-100 hover:text-red-500"

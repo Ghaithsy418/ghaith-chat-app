@@ -13,12 +13,14 @@ interface userTypes {
   display_name: string;
   email: string;
   avatar_url: string;
+  status: string;
 }
 
 interface contextTypes {
   display_name: string;
   email: string;
   avatar_url: string;
+  status: string;
   setUser: Dispatch<SetStateAction<userTypes | undefined>>;
 }
 
@@ -26,6 +28,7 @@ const initialState = {
   email: "",
   display_name: "",
   avatar_url: "",
+  status: "",
   setUser: () => null,
 };
 
@@ -33,13 +36,14 @@ const userContext = createContext<contextTypes>(initialState);
 
 function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<userTypes>();
-  const { email, display_name, avatar_url } = user ?? initialState;
+  const { email, display_name, avatar_url, status } = user ?? initialState;
   return (
     <userContext.Provider
       value={{
         email,
         display_name,
         avatar_url,
+        status,
         setUser,
       }}
     >

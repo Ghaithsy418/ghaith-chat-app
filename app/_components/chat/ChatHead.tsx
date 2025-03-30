@@ -27,7 +27,7 @@ function ChatHead() {
         <div>
           <h2 className="text-md font-semibold">{friend.friendName}</h2>
           <p className="text-sm text-gray-400">
-            Lorem ipsum dolor sit amet consectetur
+            {friend.friendStatus?.slice(0, 200)}
           </p>
         </div>
       </div>

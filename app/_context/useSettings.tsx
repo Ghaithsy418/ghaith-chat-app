@@ -10,6 +10,7 @@ import {
 
 interface settingType {
   currRightWindow: string;
+  fontSize: string;
   dispatch: ActionDispatch<[action: actionType]>;
 }
 
@@ -20,11 +21,13 @@ interface actionType {
 
 const SettingsContext = createContext<settingType>({
   currRightWindow: "",
+  fontSize: "",
   dispatch: () => {},
 });
 
 const initialState = {
   currRightWindow: "",
+  fontSize: "",
 };
 
 function reducer(state: settingType, action: actionType) {
@@ -34,6 +37,11 @@ function reducer(state: settingType, action: actionType) {
         ...state,
         currRightWindow: action.payload,
       };
+    case "changeFontSize":
+      return {
+        ...state,
+        fontSize: action.payload,
+      };
     default:
       throw new Error("something went wrong!");
   }
@@ -41,10 +49,10 @@ function reducer(state: settingType, action: actionType) {
 
 function SettingsProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState as settingType);
-  const { currRightWindow } = state;
+  const { currRightWindow, fontSize } = state;
 
   return (
-    <SettingsContext.Provider value={{ currRightWindow, dispatch }}>
+    <SettingsContext.Provider value={{ currRightWindow, fontSize, dispatch }}>
       {children}
     </SettingsContext.Provider>
   );
