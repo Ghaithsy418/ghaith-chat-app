@@ -2,8 +2,8 @@
 
 @layer components {
   .bg-main {
-    background-color: rgba(32, 39, 88, 0.793);
-    backdrop-filter: blur(10px) saturate(120%);
+    background-color: rgba(32, 39, 88, 0.75);
+    backdrop-filter: blur(8px) saturate(120%);
   }
 
   .scrollbar {

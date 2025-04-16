@@ -6,12 +6,18 @@ import { useLocale } from "next-intl";
 import { HiMiniArrowLongLeft, HiMiniArrowLongRight } from "react-icons/hi2";
 
 function BackArrow() {
-  const { setFriend } = useChatting();
+  const { setFriend, friend } = useChatting();
   const { currRightWindow, dispatch } = useSettings();
   const locale = useLocale();
 
   function handleClick() {
-    setFriend({ friendId: "", friendName: "" });
+    setFriend({
+      friendId: "",
+      friendName: "",
+      friendStatus: friend.friendStatus,
+      friendAvatar: friend.friendAvatar,
+      isBlocked: friend.isBlocked,
+    });
     if (currRightWindow === "infos")
       dispatch({ type: "currWindowIs", payload: "" });
   }

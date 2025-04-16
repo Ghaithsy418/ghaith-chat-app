@@ -62,7 +62,7 @@ function UserAvatar() {
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
             className="absolute top-[50%] left-[50%] h-[61px] w-[61px] translate-[-50%] cursor-pointer rounded-full border-1 border-slate-800/60 bg-slate-600/80 p-4 text-3xl text-slate-300/80"
           >
-            <HiOutlineCamera className="translate-x-[-1px]" />
+            <HiOutlineCamera className="ltr:translate-x-[-1px] rtl:translate-x-[1.5px]" />
           </motion.span>
         )}
       </AnimatePresence>

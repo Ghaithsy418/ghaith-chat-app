@@ -10,7 +10,7 @@ export async function signup(formData: FormData) {
   const { name, email, password } = Object.fromEntries(formData);
 
   const { error } = await supabase.auth.signUp({
-    email: String(email),
+    email: String(email).toLowerCase(),
     password: String(password),
     options: {
       data: {
@@ -97,7 +97,6 @@ export async function getMessages(friend: string){
     .from("messages")
     .select("text, send_by, send_to, created_at, is_edit")
     .or(`and(send_by.eq.${user.id},send_to.eq.${friend}),and(send_by.eq.${friend},send_to.eq.${user.id})`)
-    .order("created_at", { ascending: false });
   
   if(error) throw new Error(error.message);
   
@@ -133,4 +132,13 @@ export async function updateProfile( email:string,formData: FormData){
   if(error) throw new Error(error.message);
 
   revalidatePath("/");
+}
+
+export async function blockUser(friend: string,bool: boolean){
+  const user = await getCurrUser();
+  const {error} = await supabase.from("friends").update({"is_blocked": bool}).eq("friend_id",friend).eq("user_id",user.id);
+  const {error: error2} = await supabase.from("friends").update({"is_blocked": bool}).eq("friend_id",user.id).eq("user_id",friend)
+
+  if(error) throw new Error(error.message);
+  if(error2) throw new Error(error2.message);
 }

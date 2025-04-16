@@ -7,6 +7,7 @@ interface Friends {
   display_name: string;
   avatar_url: string;
   status: string;
+  isBlocked: boolean;
 }
 
 function ChatList({ friends }: { friends: Friends[] }) {
@@ -20,7 +21,6 @@ function ChatList({ friends }: { friends: Friends[] }) {
             .toLocaleLowerCase()
             .includes(search.toLowerCase()),
         );
-
   return (
     <div className="scrollbar flex-4/5 overflow-auto">
       {newArr?.map((friend) => (
@@ -30,6 +30,7 @@ function ChatList({ friends }: { friends: Friends[] }) {
           name={friend.display_name}
           avatar={friend.avatar_url}
           status={friend.status}
+          isBlocked={friend.isBlocked}
         />
       ))}
     </div>

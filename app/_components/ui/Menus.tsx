@@ -115,7 +115,7 @@ interface menuTypes {
 }
 
 interface toggleAndListTypes {
-  children: ReactNode;
+  children?: ReactNode;
   id: string;
 }
 

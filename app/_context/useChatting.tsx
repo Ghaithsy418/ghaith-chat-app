@@ -15,6 +15,7 @@ interface contextType {
     friendName: string;
     friendAvatar: string;
     friendStatus: string;
+    isBlocked: boolean;
   };
   setFriend: Dispatch<
     SetStateAction<{
@@ -22,6 +23,7 @@ interface contextType {
       friendId: string;
       friendAvatar: string;
       friendStatus: string;
+      isBlocked: boolean;
     }>
   >;
   search: string;
@@ -29,7 +31,13 @@ interface contextType {
 }
 
 const ChattingContext = createContext<contextType>({
-  friend: { friendId: "", friendName: "", friendAvatar: "", friendStatus: "" },
+  friend: {
+    friendId: "",
+    friendName: "",
+    friendAvatar: "",
+    friendStatus: "",
+    isBlocked: false,
+  },
   setFriend: () => {},
   search: "",
   setSearch: () => {},
@@ -41,6 +49,7 @@ function ChattingProvider({ children }: { children: ReactNode }) {
     friendName: "",
     friendAvatar: "",
     friendStatus: "",
+    isBlocked: false,
   });
   const [search, setSearch] = useState("");
 

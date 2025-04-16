@@ -20,14 +20,14 @@ const OtherMessage: React.FC<MessageTypes> = function ({
   const { friend } = useChatting();
   return (
     <div className="flex max-w-[70%] gap-2">
-      {friend.friendAvatar && (
+      {friend.friendAvatar && !friend.isBlocked && (
         <ReusableImage
           className="h-8 w-8"
           avatar_url={friend.friendAvatar}
           display_name={friend.friendName}
         />
       )}
-      {!friend.friendAvatar && (
+      {(!friend.friendAvatar || friend.isBlocked) && (
         <InitialAvatarFriends className="h-8 w-8 p-4 text-sm" />
       )}
       <div className="flex flex-col gap-1">

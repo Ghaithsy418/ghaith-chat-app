@@ -33,7 +33,7 @@ function InputField({
           required={required}
           placeholder=" "
           autoComplete={autoComplete}
-          className={`peer w-full rounded-lg bg-slate-950/40 px-3 py-2 focus:outline-3 focus:outline-offset-1 focus:outline-slate-800/80 disabled:cursor-not-allowed disabled:bg-slate-950/30 ${
+          className={`peer w-full rounded-lg bg-slate-950/40 px-3 py-2 focus:outline-3 focus:outline-offset-1 focus:outline-slate-800/80 disabled:cursor-not-allowed disabled:bg-slate-950/30 disabled:text-slate-400 ${
             error ? "border border-red-500" : ""
           }`}
         />

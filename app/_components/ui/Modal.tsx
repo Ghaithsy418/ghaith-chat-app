@@ -65,7 +65,9 @@ const Window: React.FC<windowType> = function ({ children, name }) {
         >
           <HiX />
         </button>
-        {children}
+        {cloneElement(children as React.ReactElement<{ close?: () => void }>, {
+          close,
+        })}
       </motion.div>
     </motion.div>,
     document.body,

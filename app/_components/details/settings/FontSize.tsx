@@ -2,14 +2,25 @@
 
 import { useSettings } from "@/app/_context/useSettings";
 import Cookie from "js-cookie";
+import { useTranslations } from "next-intl";
 
 function FontSize() {
   const { dispatch, fontSize } = useSettings();
-  Cookie.set("fontSize", fontSize);
+  const t = useTranslations("settings");
+  Cookie.set("fontSize", fontSize, { expires: 30 });
+
+  const options = [
+    { value: "", label: t("initialFont") },
+    { value: "sm", label: t("smallFont") },
+    { value: "md", label: t("mediumFont") },
+    { value: "lg", label: t("largeFont") },
+    { value: "xl", label: t("veryLargeFont") },
+    { value: "2xl", label: t("extremeLargeFont") },
+  ];
 
   return (
-    <div className="flex items-center justify-center gap-16 tracking-wider">
-      <h4 className="text-lg text-indigo-100">Font Size:</h4>
+    <div className="flex items-center justify-center gap-20 tracking-wider">
+      <h4 className="text-lg text-indigo-100">{t("fontSize")}</h4>
       <select
         value={fontSize}
         onChange={(e) =>
@@ -26,14 +37,5 @@ function FontSize() {
     </div>
   );
 }
-
-const options = [
-  { value: "", label: "Chats Font Size" },
-  { value: "sm", label: "small" },
-  { value: "md", label: "medium" },
-  { value: "lg", label: "large" },
-  { value: "xl", label: "very large" },
-  { value: "2xl", label: "extreme large" },
-];
 
 export default FontSize;

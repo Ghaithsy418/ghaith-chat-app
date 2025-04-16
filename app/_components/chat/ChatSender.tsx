@@ -33,15 +33,15 @@ function ChatSender({
       onSubmit={async (e) => {
         e.preventDefault();
         if (text !== "") {
+          setText("");
           startTransition(async () => {
-            setText("");
             setOpen(false);
             addMessage({
               text,
-              created_at: Date.now(),
+              created_at: Date.now() + 1,
               send_by: userId,
               send_to: friend,
-              isEdit: false,
+              is_edit: false,
             });
             await sendMessage(text, friend.friendId);
           });
@@ -54,9 +54,9 @@ function ChatSender({
           type="text"
           ref={inputFocus}
           placeholder={t("placeholder")}
-          className="h-full flex-1 border-0 p-2 text-lg focus:border-0 focus:outline-0 rtl:placeholder:tracking-wider"
+          className="h-full flex-1 border-0 p-2 text-lg focus:border-0 focus:outline-0 disabled:cursor-not-allowed rtl:placeholder:tracking-wider"
           value={text}
-          disabled={isPending}
+          disabled={isPending || friend.isBlocked}
           onChange={(e) => setText(e.target.value)}
           onClick={() => setOpen(false)}
         />
@@ -65,7 +65,7 @@ function ChatSender({
           <HiOutlinePhoto className={iconClassName} />
           <HiOutlineMicrophone className={iconClassName} />
         </div>
-        {text && (
+        {text && !friend.isBlocked && (
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 1 } }}

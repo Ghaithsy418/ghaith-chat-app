@@ -22,14 +22,14 @@ function Chat({ userId }: { userId: string }) {
   const [isPending, startTransition] = useTransition();
   const [messagesOptimistic, addMessage] = useOptimistic(
     messages,
-    (currMessages, newMessage) => [...currMessages, newMessage as messagesType],
+    (currMessages, newMessage) => [newMessage as messagesType, ...currMessages],
   );
   useEffect(
     function () {
       async function getTheMessages() {
         startTransition(async () => {
           const data = await getMessages(friend.friendId);
-          setMessages(data || []);
+          setMessages(data.reverse());
         });
       }
       getTheMessages();

@@ -13,22 +13,24 @@ function ChatHead() {
       <div className="flex items-center justify-center gap-5">
         <BackArrow />
         <div>
-          {friend.friendAvatar && (
+          {friend.friendAvatar && !friend.isBlocked && (
             <ReusableImage
               display_name={friend.friendName}
               avatar_url={friend.friendAvatar}
               className="h-12 w-12"
             />
           )}
-          {!friend.friendAvatar && (
+          {(!friend.friendAvatar || friend.isBlocked) && (
             <InitialAvatarFriends className="h-12 w-12 p-1.5 text-xl" />
           )}
         </div>
         <div>
           <h2 className="text-md font-semibold">{friend.friendName}</h2>
-          <p className="text-sm text-gray-400">
-            {friend.friendStatus?.slice(0, 200)}
-          </p>
+          {!friend.isBlocked && (
+            <p className="text-sm text-gray-400">
+              {friend.friendStatus?.slice(0, 200)}
+            </p>
+          )}
         </div>
       </div>
       <div className="flex items-center justify-center gap-5">

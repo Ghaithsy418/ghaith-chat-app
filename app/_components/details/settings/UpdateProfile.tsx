@@ -1,9 +1,13 @@
+"use client";
+
 import React from "react";
 import { CgProfile } from "react-icons/cg";
 import Modal from "../../ui/Modal";
 import UpdateForm from "./UpdateForm";
+import { useTranslations } from "next-intl";
 
 function UpdateProfile() {
+  const t = useTranslations("settings");
   return (
     <Modal>
       <Modal.Open name="updateProfile">
@@ -11,7 +15,7 @@ function UpdateProfile() {
           <span className="flex items-center justify-center text-3xl">
             <CgProfile />
           </span>
-          <h4>Update Profile</h4>
+          <h4>{t("updateButton")}</h4>
         </div>
       </Modal.Open>
       <Modal.Window name="updateProfile">

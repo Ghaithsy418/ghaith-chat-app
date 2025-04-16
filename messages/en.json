@@ -16,7 +16,8 @@
     "privacy": "Privacy and Help",
     "photos": "Shared Photos",
     "files": "Shared Files",
-    "blockUser": "Block User"
+    "blockUser": "Block User",
+    "blockUserActive": "Unblock User"
   },
   "login": {
     "title": "Welcome Back!",
@@ -41,5 +42,37 @@
     "haveAcc": "You have an account?",
     "login": "Login",
     "or": "or"
+  },
+  "settings": {
+    "hoverColored": "Hover the Card",
+    "hoverText": "to read Your Status",
+    "updateButton": "Update Profile",
+    "fontSize": "Font Size",
+    "initialFont": "Chats Font Size",
+    "smallFont": "small",
+    "mediumFont": "medium",
+    "largeFont": "large",
+    "veryLargeFont": "very large",
+    "extremeLargeFont": "extreme large",
+    "appBackground": "App Background",
+    "snowBackground": "Snow ❄️",
+    "seaBackground": "Sea 🌊",
+    "mapBackground": "World Map 🗺️",
+    "spaceBackground": "Space 🌌",
+    "language": "Select A Language",
+    "arabic": "اللغة العربية",
+    "english": "English"
+  },
+  "updateWindow": {
+    "updateTitle": "Update Profile",
+    "email": "Email",
+    "fullName": "Full Name",
+    "status": "Status",
+    "updateButton": "Update"
+  },
+  "copyright": {
+    "text": "Copyright",
+    "saves": "by",
+    "name": "Ghaith Shabakji"
   }
 }

@@ -43,7 +43,7 @@ export async function getFriends(){
     .eq("friend_id", user.id);
 
   if(error2) throw new Error(error2.message);
-
+  
   const allFriends = [
     ...(friends?.map(f => ({
       id: f.friend.id,
@@ -51,6 +51,7 @@ export async function getFriends(){
       email: f.friend.email,
       avatar_url: f.friend.avatar_url,
       status: f.friend.status,
+      isBlocked: f.is_blocked,
     })) || []),
     ...(friendsOf?.map(f => ({
       id: f.user.id,
@@ -58,8 +59,10 @@ export async function getFriends(){
       email: f.user.email,
       avatar_url: f.user.avatar_url,
       status: f.user.status,
+      isBlocked: f.is_blocked,
     })) || [])
   ];
 
   return allFriends;
 }
+

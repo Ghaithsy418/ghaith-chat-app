@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import { Cabin } from "next/font/google";
+import { cookies } from "next/headers";
 import { Toaster } from "react-hot-toast";
 import { ChattingProvider } from "./_context/useChatting";
+import { UserProvider } from "./_context/useCurrUser";
 import { SettingsProvider } from "./_context/useSettings";
 import "./globals.css";
-import { getLocale } from "next-intl/server";
-import { NextIntlClientProvider } from "next-intl";
-import { UserProvider } from "./_context/useCurrUser";
 
 const cabin = Cabin({
   variable: "--font-cabin",
@@ -29,10 +30,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+  const cookieStore = await cookies();
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body
-        className={`${cabin.className} bg-background flex h-screen items-center justify-center bg-[url(../public/background.jpg)] bg-cover text-gray-100 antialiased`}
+        style={{
+          backgroundImage: `url("./background${cookieStore.get("background")?.value || ""}.jpg")`,
+        }}
+        className={`${cabin.className} bg-background flex h-screen items-center justify-center bg-cover bg-center text-gray-100 antialiased`}
       >
         <NextIntlClientProvider locale={locale}>
           <UserProvider>
