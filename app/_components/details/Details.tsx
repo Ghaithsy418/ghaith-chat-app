@@ -3,14 +3,22 @@
 import { useSettings } from "@/app/_context/useSettings";
 import AppSettings from "./settings/AppSettings";
 import FriendDetails from "./FriendDetails";
+import BackArrow from "../chat/BackArrow";
 
-function Details() {
+function Details({ widthSize = 0 }: { widthSize?: number }) {
   const { currRightWindow } = useSettings();
 
   if (currRightWindow === "") return null;
 
   return (
-    <div className="scrollbar h-full flex-1 overflow-auto py-5">
+    <div
+      className={`scrollbar h-full ${widthSize ? "flex-2" : "flex-1"} overflow-auto border-l-1 border-gray-300/30 py-5`}
+    >
+      {widthSize === 875 && (
+        <span className="ml-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-slate-800/80 p-2">
+          <BackArrow />
+        </span>
+      )}
       {currRightWindow === "infos" && <FriendDetails />}
       {currRightWindow === "settings" && <AppSettings />}
     </div>

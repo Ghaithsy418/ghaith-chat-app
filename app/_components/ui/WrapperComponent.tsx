@@ -5,6 +5,9 @@ import toast from "react-hot-toast";
 import Chat from "../chat/Chat";
 import Details from "../details/Details";
 import { useCurrUser } from "@/app/_context/useCurrUser";
+import { useResize } from "@/app/_hooks/useResize";
+import { useSettings } from "@/app/_context/useSettings";
+import { useChatting } from "@/app/_context/useChatting";
 
 interface WrapperTypes {
   children: ReactNode;
@@ -24,6 +27,9 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
   user,
 }) {
   const { setUser } = useCurrUser();
+  const { widthSize } = useResize();
+  const { currRightWindow } = useSettings();
+  const { friend } = useChatting();
 
   useEffect(function () {
     toast.success("Welcome :)");
@@ -40,6 +46,31 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
     },
     [user, setUser],
   );
+
+  if (widthSize === 875)
+    return (
+      <div className={className}>
+        {friend.friendName === "" && children}
+        {friend.friendName !== "" &&
+          (currRightWindow === "" ? (
+            <Chat userId={user.id} />
+          ) : (
+            <Details widthSize={widthSize} />
+          ))}
+      </div>
+    );
+
+  if (widthSize === 1469)
+    return (
+      <div className={className}>
+        {children}
+        {currRightWindow === "" ? (
+          <Chat userId={user.id} />
+        ) : (
+          <Details widthSize={widthSize} />
+        )}
+      </div>
+    );
 
   return (
     <div className={className}>

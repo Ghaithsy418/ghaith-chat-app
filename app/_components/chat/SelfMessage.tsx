@@ -13,7 +13,7 @@ const SelfMessage: React.FC<MessageTypes> = function ({
   time,
 }) {
   return (
-    <div className="flex max-w-[70%] flex-col gap-1 place-self-end">
+    <div className="flex max-w-[40vw] flex-col gap-1 place-self-end">
       {image && (
         <img
           src={image}
@@ -21,7 +21,7 @@ const SelfMessage: React.FC<MessageTypes> = function ({
           className="h-76 w-full rounded-lg object-cover"
         />
       )}
-      <p className="rounded-lg bg-indigo-400/80 p-3">{children}</p>
+      <p className="rounded-lg bg-indigo-400/80 p-3 break-words">{children}</p>
       <span className="text-[11px] font-bold ltr:ml-2 rtl:mr-2">
         {format(time, "p")}
       </span>

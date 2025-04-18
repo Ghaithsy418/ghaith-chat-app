@@ -50,7 +50,7 @@ function ChatContainer({
 
   return (
     <div
-      className={`scrollbar ${fontSize ? `text-${fontSize}` : "text-md"} relative flex flex-1 flex-col-reverse gap-5 overflow-scroll px-3 py-4 leading-6`}
+      className={`scrollbar ${fontSize ? `text-${fontSize}` : "text-md"} relative flex flex-1 flex-col-reverse gap-5 overflow-auto px-3 py-4 leading-6`}
     >
       {messages?.map((message, index) => {
         if (message.send_by === friend.friendId)

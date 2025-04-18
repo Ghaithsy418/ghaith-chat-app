@@ -17,7 +17,8 @@
     "photos": "الصور المرسلة",
     "files": "الملفات المرسلة",
     "blockUser": "حظر المستخدم",
-    "blockUserActive": "إلغاء حظر المستخدم"
+    "blockUserActive": "إلغاء حظر المستخدم",
+    "gotBlocked": "لقد تم حظرك"
   },
   "login": {
     "title": "مرحباً بعودتك",

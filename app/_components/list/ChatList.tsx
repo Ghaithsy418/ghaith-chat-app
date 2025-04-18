@@ -8,6 +8,7 @@ interface Friends {
   avatar_url: string;
   status: string;
   isBlocked: boolean;
+  gotBlocked: boolean;
 }
 
 function ChatList({ friends }: { friends: Friends[] }) {
@@ -31,6 +32,7 @@ function ChatList({ friends }: { friends: Friends[] }) {
           avatar={friend.avatar_url}
           status={friend.status}
           isBlocked={friend.isBlocked}
+          gotBlocked={friend.gotBlocked}
         />
       ))}
     </div>

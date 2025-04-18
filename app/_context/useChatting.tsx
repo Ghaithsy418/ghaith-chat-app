@@ -9,6 +9,15 @@ import {
   useState,
 } from "react";
 
+const initialState = {
+  friendId: "",
+  friendName: "",
+  friendAvatar: "",
+  friendStatus: "",
+  isBlocked: false,
+  gotBlocked: false,
+};
+
 interface contextType {
   friend: {
     friendId: string;
@@ -16,41 +25,22 @@ interface contextType {
     friendAvatar: string;
     friendStatus: string;
     isBlocked: boolean;
+    gotBlocked: boolean;
   };
-  setFriend: Dispatch<
-    SetStateAction<{
-      friendName: string;
-      friendId: string;
-      friendAvatar: string;
-      friendStatus: string;
-      isBlocked: boolean;
-    }>
-  >;
+  setFriend: Dispatch<SetStateAction<contextType["friend"]>>;
   search: string;
   setSearch: Dispatch<SetStateAction<string>>;
 }
 
 const ChattingContext = createContext<contextType>({
-  friend: {
-    friendId: "",
-    friendName: "",
-    friendAvatar: "",
-    friendStatus: "",
-    isBlocked: false,
-  },
+  friend: initialState,
   setFriend: () => {},
   search: "",
   setSearch: () => {},
 });
 
 function ChattingProvider({ children }: { children: ReactNode }) {
-  const [friend, setFriend] = useState({
-    friendId: "",
-    friendName: "",
-    friendAvatar: "",
-    friendStatus: "",
-    isBlocked: false,
-  });
+  const [friend, setFriend] = useState(initialState);
   const [search, setSearch] = useState("");
 
   return (

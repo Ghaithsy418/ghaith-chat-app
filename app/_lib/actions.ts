@@ -137,8 +137,10 @@ export async function updateProfile( email:string,formData: FormData){
 export async function blockUser(friend: string,bool: boolean){
   const user = await getCurrUser();
   const {error} = await supabase.from("friends").update({"is_blocked": bool}).eq("friend_id",friend).eq("user_id",user.id);
-  const {error: error2} = await supabase.from("friends").update({"is_blocked": bool}).eq("friend_id",user.id).eq("user_id",friend)
+  const {error: error2} = await supabase.from("friends").update({"got_blocked": bool}).eq("friend_id",user.id).eq("user_id",friend)
 
   if(error) throw new Error(error.message);
   if(error2) throw new Error(error2.message);
+
+  return {success: true}
 }

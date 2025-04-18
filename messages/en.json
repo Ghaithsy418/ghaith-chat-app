@@ -17,7 +17,8 @@
     "photos": "Shared Photos",
     "files": "Shared Files",
     "blockUser": "Block User",
-    "blockUserActive": "Unblock User"
+    "blockUserActive": "Unblock User",
+    "gotBlocked": "You got blocked :("
   },
   "login": {
     "title": "Welcome Back!",

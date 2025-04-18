@@ -52,6 +52,7 @@ export async function getFriends(){
       avatar_url: f.friend.avatar_url,
       status: f.friend.status,
       isBlocked: f.is_blocked,
+      gotBlocked: f.got_blocked,
     })) || []),
     ...(friendsOf?.map(f => ({
       id: f.user.id,
@@ -59,7 +60,8 @@ export async function getFriends(){
       email: f.user.email,
       avatar_url: f.user.avatar_url,
       status: f.user.status,
-      isBlocked: f.is_blocked,
+      isBlocked: f.got_blocked,
+      gotBlocked: f.is_blocked,
     })) || [])
   ];
 

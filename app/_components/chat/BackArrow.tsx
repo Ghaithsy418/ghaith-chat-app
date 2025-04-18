@@ -17,6 +17,7 @@ function BackArrow() {
       friendStatus: friend.friendStatus,
       friendAvatar: friend.friendAvatar,
       isBlocked: friend.isBlocked,
+      gotBlocked: friend.gotBlocked,
     });
     if (currRightWindow === "infos")
       dispatch({ type: "currWindowIs", payload: "" });

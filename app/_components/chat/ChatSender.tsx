@@ -56,7 +56,7 @@ function ChatSender({
           placeholder={t("placeholder")}
           className="h-full flex-1 border-0 p-2 text-lg focus:border-0 focus:outline-0 disabled:cursor-not-allowed rtl:placeholder:tracking-wider"
           value={text}
-          disabled={isPending || friend.isBlocked}
+          disabled={isPending || friend.isBlocked || friend.gotBlocked}
           onChange={(e) => setText(e.target.value)}
           onClick={() => setOpen(false)}
         />

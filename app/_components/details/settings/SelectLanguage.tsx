@@ -17,7 +17,7 @@ function SelectLanguage() {
   ];
 
   return (
-    <div className="flex items-center justify-center gap-16 tracking-wider">
+    <div className="flex w-full items-center justify-between tracking-wider">
       <h4 className="text-lg text-indigo-100">{t("language")}</h4>
       <select
         value={language}
