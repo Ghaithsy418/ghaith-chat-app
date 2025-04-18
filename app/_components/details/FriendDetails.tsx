@@ -13,7 +13,7 @@ function FriendDetails() {
   const [isPending, startTransition] = useTransition();
   const { friend, setFriend } = useChatting();
   return (
-    <div className="flex h-full flex-col gap-5 px-4">
+    <div className="scrollbar flex h-full flex-col gap-5 overflow-auto px-4">
       <UserDetails />
       <ChatSettings />
       <PrivacyAndHelp />

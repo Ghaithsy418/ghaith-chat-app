@@ -8,7 +8,7 @@ import UpdateProfile from "./UpdateProfile";
 function AppSettings() {
   const t = useTranslations("copyright");
   return (
-    <div className="flex h-full flex-col items-center justify-between pb-2">
+    <div className="flex h-[95%] flex-col items-center justify-between lg:h-full">
       <div className="flex w-full flex-col items-center py-4">
         <CurrUserData />
         <UpdateProfile />

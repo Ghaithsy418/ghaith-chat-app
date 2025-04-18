@@ -50,7 +50,8 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
   if (widthSize === 875)
     return (
       <div className={className}>
-        {friend.friendName === "" && children}
+        {friend.friendName === "" && currRightWindow === "" && children}
+        {currRightWindow === "settings" && <Details widthSize={widthSize} />}
         {friend.friendName !== "" &&
           (currRightWindow === "" ? (
             <Chat userId={user.id} />

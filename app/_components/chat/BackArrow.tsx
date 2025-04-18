@@ -7,7 +7,7 @@ import { HiMiniArrowLongLeft, HiMiniArrowLongRight } from "react-icons/hi2";
 
 function BackArrow() {
   const { setFriend, friend } = useChatting();
-  const { currRightWindow, dispatch } = useSettings();
+  const { dispatch } = useSettings();
   const locale = useLocale();
 
   function handleClick() {
@@ -19,8 +19,7 @@ function BackArrow() {
       isBlocked: friend.isBlocked,
       gotBlocked: friend.gotBlocked,
     });
-    if (currRightWindow === "infos")
-      dispatch({ type: "currWindowIs", payload: "" });
+    dispatch({ type: "currWindowIs", payload: "" });
   }
 
   return (
