@@ -37,7 +37,7 @@ function Chat({ userId }: { userId: string }) {
     [friend],
   );
   return (
-    <div className="flex h-full flex-2 flex-col">
+    <div className="flex h-full w-full flex-2 flex-col">
       {!friend && (
         <div className="my-auto flex flex-col items-center justify-center gap-4 bg-linear-to-br from-indigo-50/80 via-indigo-100/80 to-indigo-200/80 bg-clip-text text-3xl font-bold tracking-wide text-transparent">
           <h2>

@@ -19,7 +19,7 @@ const OtherMessage: React.FC<MessageTypes> = function ({
 }) {
   const { friend } = useChatting();
   return (
-    <div className="flex max-w-[70%] gap-2">
+    <div className="flex max-w-[40vw] gap-2">
       {friend.friendAvatar && !friend.isBlocked && !friend.gotBlocked && (
         <ReusableImage
           className="h-8 w-8"
@@ -38,9 +38,7 @@ const OtherMessage: React.FC<MessageTypes> = function ({
             alt="image"
           />
         )}
-        <p className="rounded-lg bg-slate-950/60 p-2 break-words whitespace-pre-wrap">
-          {children}
-        </p>
+        <p className="rounded-lg bg-slate-950/60 p-3 break-words">{children}</p>
         <span className="place-self-end text-[11px] font-bold ltr:mr-2 rtl:ml-2">
           {format(time, "p")}
         </span>

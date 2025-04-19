@@ -10,7 +10,6 @@ export function useResize(){
                 if(window.innerWidth <= 875) setWidthSize(875)    
         }
         handleResize();
-
         window.addEventListener("resize",handleResize);
 
         return ()=> window.removeEventListener("resize",handleResize)

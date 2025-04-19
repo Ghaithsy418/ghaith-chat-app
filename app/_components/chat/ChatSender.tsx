@@ -48,7 +48,7 @@ function ChatSender({
         }
       }}
     >
-      <div className="flex h-16 items-center gap-5 border-t-1 border-indigo-100/30 bg-slate-950/30 px-5 transition-all duration-300">
+      <div className="flex h-16 items-center gap-2 border-t-1 border-indigo-100/30 bg-slate-950/30 px-5 transition-all duration-300 sm:gap-5">
         <EmojisPicker setText={setText} open={open} setOpen={setOpen} />
         <input
           type="text"
