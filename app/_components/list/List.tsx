@@ -7,7 +7,7 @@ import { getFriends } from "@/app/_lib/api";
 async function List() {
   const friends = await getFriends();
   return (
-    <div className="flex flex-1 flex-col justify-center border-gray-300/30 py-4 sm:border-r-1">
+    <div className="scrollbar flex flex-1 flex-col justify-center overflow-auto border-r-1 border-gray-300/30 py-4">
       <ListHead />
       <Suspense fallback={<Spinner className="mx-auto mb-[80%]" />}>
         <ChatList friends={friends} />

@@ -23,7 +23,7 @@ function ChatList({ friends }: { friends: Friends[] }) {
             .includes(search.toLowerCase()),
         );
   return (
-    <div className="scrollbar flex-4/5 overflow-auto">
+    <div className="flex-4/5">
       {newArr?.map((friend) => (
         <ChatItem
           key={friend.id}
