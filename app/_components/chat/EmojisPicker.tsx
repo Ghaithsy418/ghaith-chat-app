@@ -19,7 +19,7 @@ const EmojisPicker: React.FC<EmojiTypes> = function ({
   return (
     <div className="relative">
       {open && (
-        <div className="absolute bottom-14 left-0">
+        <div className="absolute bottom-14 ltr:left-0 rtl:right-0">
           <EmojiPicker
             height={400}
             lazyLoadEmojis={true}
