@@ -37,7 +37,7 @@ export default async function RootLayout({
         style={{
           backgroundImage: `url("./background${cookieStore.get("background")?.value || ""}.jpg")`,
         }}
-        className={`${cabin.className} bg-background flex h-screen items-center justify-center bg-cover bg-center text-gray-100 antialiased`}
+        className={`${cabin.className} bg-background flex h-[90vh] items-center justify-center bg-cover bg-center text-gray-100 antialiased sm:h-screen`}
       >
         <NextIntlClientProvider locale={locale}>
           <UserProvider>
