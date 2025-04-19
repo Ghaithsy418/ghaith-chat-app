@@ -4,15 +4,16 @@ import { useChatting } from "@/app/_context/useChatting";
 import { iconClassName } from "@/app/_helpers/classNames";
 import { sendMessage } from "@/app/_lib/actions";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useRef, useState, useTransition } from "react";
 import {
   HiOutlineCamera,
   HiOutlineMicrophone,
+  HiOutlinePaperClip,
   HiOutlinePhoto,
 } from "react-icons/hi2";
 import { RiSendPlaneFill } from "react-icons/ri";
 import EmojisPicker from "./EmojisPicker";
-import { useTranslations } from "next-intl";
 
 function ChatSender({
   addMessage,
@@ -48,7 +49,7 @@ function ChatSender({
         }
       }}
     >
-      <div className="flex h-16 items-center gap-2 border-t-1 border-indigo-100/30 bg-slate-950/30 px-5 transition-all duration-300 sm:gap-5">
+      <div className="flex h-16 items-center gap-3 border-t-1 border-indigo-100/30 bg-slate-950/30 px-5 transition-all duration-300 sm:gap-5">
         <EmojisPicker setText={setText} open={open} setOpen={setOpen} />
         <input
           type="text"
@@ -61,9 +62,10 @@ function ChatSender({
           onClick={() => setOpen(false)}
         />
         <div className="flex items-center justify-center gap-5">
-          <HiOutlineCamera className={iconClassName} />
-          <HiOutlinePhoto className={iconClassName} />
-          <HiOutlineMicrophone className={iconClassName} />
+          <HiOutlineCamera className={`${iconClassName} hidden sm:block`} />
+          <HiOutlinePhoto className={`${iconClassName} hidden sm:block`} />
+          <HiOutlineMicrophone className={`${iconClassName} hidden sm:block`} />
+          <HiOutlinePaperClip className={`${iconClassName} block sm:hidden`} />
         </div>
         {text && !friend.isBlocked && (
           <motion.button
