@@ -7,14 +7,14 @@ interface WelcomeTypes {
   children: ReactNode;
 }
 
-const WelcomeText: React.FC<WelcomeTypes> = function ({children}) {
+const WelcomeText: React.FC<WelcomeTypes> = function ({ children }) {
   return (
     <motion.h1
       variants={variants}
       initial="hidden"
       animate="visible"
       whileHover="hover"
-      className="p-2 bg-gradient-to-r from-indigo-300 via-indigo-100 to-indigo-50 bg-clip-text text-5xl font-bold text-transparent"
+      className="bg-gradient-to-r from-indigo-300 via-indigo-100 to-indigo-50 bg-clip-text p-2 text-4xl font-bold text-transparent sm:text-5xl"
     >
       {children}
     </motion.h1>

@@ -22,7 +22,7 @@ function InputField({
   required = false,
 }: InputFieldProps) {
   return (
-    <div className="w-[400px]">
+    <div className="w-[80vw] sm:w-[400px]">
       <div className="relative w-full">
         <input
           disabled={disabled}

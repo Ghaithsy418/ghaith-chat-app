@@ -34,7 +34,7 @@ function AddUser() {
             placeholder={t("searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 border-0 pb-1 focus:border-0 focus:outline-0"
+            className="flex-1 border-0 pb-1 placeholder:text-xs focus:border-0 focus:outline-0 sm:placeholder:text-sm"
           />
         </div>
         <button
