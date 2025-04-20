@@ -12,7 +12,7 @@ function Details({ widthSize = 0 }: { widthSize?: number }) {
 
   return (
     <div
-      className={`${widthSize ? "flex-2" : "flex-1"} border-gray-300/30 py-5`}
+      className={`${widthSize ? "flex-2" : "flex-1"} border-gray-300/30 py-5 ltr:border-l-1 rtl:border-r-1`}
     >
       {widthSize === 875 && (
         <span className="ml-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-slate-800/80 p-2">

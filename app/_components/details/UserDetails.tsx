@@ -25,7 +25,7 @@ function UserDetails() {
         )}
       </div>
       <h2 className="text-lg font-semibold">{friend.friendName}</h2>
-      <p className="mb-6 text-sm">Lorem ipsum dolor sit amet consectetur,</p>
+      <p className="mb-5 text-sm text-slate-300">{friend.friendStatus}</p>
     </div>
   );
 }
