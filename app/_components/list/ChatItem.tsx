@@ -30,7 +30,7 @@ function ChatItem(props: chatTypes) {
         });
         dispatch({ type: "currWindowIs", payload: "" });
       }}
-      className={`flex cursor-pointer items-center gap-5 border-b-1 border-indigo-100/30 p-4 transition-all duration-300 hover:border-indigo-100/0 hover:bg-indigo-50/20 ${friend.friendId === props.id ? "bg-indigo-200/20" : ""} `}
+      className={`flex cursor-pointer items-center gap-5 p-4 transition-all duration-300 not-last:border-b-1 not-last:border-indigo-100/30 hover:border-indigo-100/0 hover:bg-indigo-50/20 ${friend.friendId === props.id ? "bg-indigo-200/20" : ""} `}
     >
       <div>
         {props.avatar && !props.isBlocked && !props.gotBlocked && (
