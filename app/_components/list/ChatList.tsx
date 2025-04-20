@@ -24,17 +24,7 @@ function ChatList({ friends }: { friends: Friends[] }) {
         );
   return (
     <div className="flex-4/5">
-      {newArr?.map((friend) => (
-        <ChatItem
-          key={friend.id}
-          id={friend.id}
-          name={friend.display_name}
-          avatar={friend.avatar_url}
-          status={friend.status}
-          isBlocked={friend.isBlocked}
-          gotBlocked={friend.gotBlocked}
-        />
-      ))}
+      {newArr?.map((friend) => <ChatItem key={friend.id} friend={friend} />)}
     </div>
   );
 }
