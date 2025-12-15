@@ -1,25 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
 
 interface imageTypes {
-  avatar_url: string;
-  display_name: string;
+  image: string;
+  fullName: string;
   className?: string;
 }
 
-function ReusableImage({
-  avatar_url,
-  display_name,
-  className = "",
-}: imageTypes) {
+function ReusableImage({ image, fullName, className = "" }: imageTypes) {
   return (
     <img
       src={
         process.env.NEXT_PUBLIC_SUPABASE_URL +
         "/storage/v1/object/public/avatars//" +
-        avatar_url
+        image
       }
-      alt={`avatar for ${display_name}`}
+      alt={`avatar for ${fullName}`}
       className={`rounded-full object-cover ${className}`}
     />
   );

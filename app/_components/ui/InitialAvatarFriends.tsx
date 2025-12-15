@@ -1,6 +1,6 @@
 "use client";
-import { useChatting } from "@/app/_context/useChatting";
-import React from "react";
+
+import useChatting from "@/app/_context/useChatting";
 
 function InitialAvatarFriends({ className = "" }) {
   const { friend } = useChatting();

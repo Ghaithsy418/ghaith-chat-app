@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { ReactNode } from "react";
 import { format } from "date-fns";
+import React, { ReactNode } from "react";
 interface MessageTypes {
   image?: string;
   children: ReactNode;
@@ -21,7 +21,9 @@ const SelfMessage: React.FC<MessageTypes> = function ({
           className="h-76 w-full rounded-lg object-cover"
         />
       )}
-      <p className="rounded-lg bg-indigo-400/80 p-3 break-words">{children}</p>
+      <p className="rounded-lg bg-indigo-400/80 p-3 wrap-break-word">
+        {children}
+      </p>
       <span className="text-[11px] font-bold ltr:ml-2 rtl:mr-2">
         {format(time, "p")}
       </span>

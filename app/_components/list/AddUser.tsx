@@ -1,12 +1,9 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { fetchUsers } from "@/app/_lib/api";
+import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import { HiSearch } from "react-icons/hi";
 import Spinner from "../ui/Spinner";
-import { addFriend } from "@/app/_lib/actions";
-import toast from "react-hot-toast";
-import { useTranslations } from "next-intl";
 
 function AddUser() {
   const [search, setSearch] = useState("");
@@ -14,15 +11,15 @@ function AddUser() {
   const [isPending, startTransition] = useTransition();
   const t = useTranslations("addingUsers");
 
-  function handleSearch() {
-    setResult([]);
-    async function fetch() {
-      const res = await fetchUsers(search.toLowerCase());
-      setResult(res as unknown as []);
-    }
+  // function handleSearch() {
+  //   setResult([]);
+  //   async function fetch() {
+  //     const res = await fetchUsers(search.toLowerCase());
+  //     setResult(res as unknown as []);
+  //   }
 
-    startTransition(() => fetch());
-  }
+  //   startTransition(() => fetch());
+  // }
 
   return (
     <div className="flex flex-col gap-6 rtl:tracking-wide">
@@ -38,7 +35,7 @@ function AddUser() {
           />
         </div>
         <button
-          onClick={handleSearch}
+          // onClick={handleSearch}
           className="cursor-pointer rounded-md bg-slate-900/70 px-4 py-1.5 transition-all duration-300 hover:bg-slate-950/70 rtl:px-5 rtl:py-2"
         >
           {t("button")}
@@ -60,13 +57,13 @@ function AddUser() {
             </h3>
             <p className="font-semilight text-xs text-gray-300">{item.email}</p>
             <button
-              onClick={async () => {
-                const bool = await addFriend(item.id);
-                if (!bool)
-                  toast.error(`${item.display_name} is Really your friend!`);
-                else
-                  toast.success(`${item.display_name} is Your Friend Now 😁`);
-              }}
+              // onClick={async () => {
+              //   const bool = await addFriend(item.id);
+              //   if (!bool)
+              //     toast.error(`${item.display_name} is Really your friend!`);
+              //   else
+              //     toast.success(`${item.display_name} is Your Friend Now 😁`);
+              // }}
               className="cursor-pointer rounded-md bg-slate-900/70 px-4 py-2 transition-all duration-300 hover:bg-slate-950/70"
             >
               {t("addingButton")}

@@ -1,41 +1,15 @@
 "use client";
 
-import { useChatting } from "@/app/_context/useChatting";
+import useChatting from "@/app/_context/useChatting";
+import { useGetMessages } from "@/app/_hooks/clientHooks/useGetMessages";
+import Spinner from "../ui/Spinner";
 import ChatContainer from "./ChatContainer";
 import ChatHead from "./ChatHead";
-import ChatSender from "./ChatSender";
-import { useEffect, useOptimistic, useState, useTransition } from "react";
-import Spinner from "../ui/Spinner";
-import { getMessages } from "@/app/_lib/actions";
-
-interface messagesType {
-  created_at: string;
-  text: string;
-  send_by: string;
-  send_to: string;
-  is_edit: boolean;
-}
 
 function Chat({ userId }: { userId: string }) {
-  const { friend } = useChatting();
-  const [messages, setMessages] = useState<messagesType[]>([]);
-  const [isPending, startTransition] = useTransition();
-  const [messagesOptimistic, addMessage] = useOptimistic(
-    messages,
-    (currMessages, newMessage) => [newMessage as messagesType, ...currMessages],
-  );
-  useEffect(
-    function () {
-      async function getTheMessages() {
-        startTransition(async () => {
-          const data = await getMessages(friend.friendId);
-          setMessages(data.reverse());
-        });
-      }
-      getTheMessages();
-    },
-    [friend],
-  );
+  const { friend, roomId } = useChatting();
+  const { data: messages, isLoading, error } = useGetMessages(roomId);
+
   return (
     <div className="flex h-full w-full flex-2 flex-col">
       {!friend && (
@@ -54,15 +28,12 @@ function Chat({ userId }: { userId: string }) {
         <>
           <ChatHead />
 
-          {isPending ? (
+          {isLoading ? (
             <Spinner className="mx-auto my-auto" />
           ) : (
-            <ChatContainer
-              setMessages={setMessages}
-              messages={messagesOptimistic}
-            />
+            <ChatContainer messages={messages} />
           )}
-          <ChatSender addMessage={addMessage} userId={userId} />
+          {/* <ChatSender addMessage={addMessage} userId={userId} /> */}
         </>
       )}
     </div>

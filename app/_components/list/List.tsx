@@ -1,17 +1,19 @@
-import { Suspense } from "react";
+"use client";
+
+import { useGetRooms } from "@/app/_hooks/clientHooks/useGetRooms";
+import Spinner from "../ui/Spinner";
 import ChatList from "./ChatList";
 import ListHead from "./ListHead";
-import Spinner from "../ui/Spinner";
-import { getFriends } from "@/app/_lib/api";
 
-async function List() {
-  const friends = await getFriends();
+function List() {
+  const { data: rooms, isLoading, error } = useGetRooms();
+
   return (
-    <div className="scrollbar flex flex-1 flex-col justify-center overflow-auto border-gray-300/30 py-4 ltr:border-r-1 rtl:border-l-1">
+    <div className="scrollbar flex flex-1 flex-col justify-center overflow-auto border-gray-300/30 py-4 ltr:border-r rtl:border-l">
       <ListHead />
-      <Suspense fallback={<Spinner className="mx-auto mb-[80%]" />}>
-        <ChatList friends={friends} />
-      </Suspense>
+      {isLoading && <Spinner className="mx-auto mb-[80%]" />}
+      {error && <p>{error.message}</p>}
+      {!isLoading && !error && <ChatList rooms={rooms} />}
     </div>
   );
 }

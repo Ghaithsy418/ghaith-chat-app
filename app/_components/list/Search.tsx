@@ -1,7 +1,7 @@
 "use client";
-import { useChatting } from "@/app/_context/useChatting";
-import { HiSearch } from "react-icons/hi";
+import useChatting from "@/app/_context/useChatting";
 import { useTranslations } from "next-intl";
+import { HiSearch } from "react-icons/hi";
 
 function Search() {
   const { search, setSearch } = useChatting();

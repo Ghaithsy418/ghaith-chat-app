@@ -1,47 +1,42 @@
 "use client";
 
-import React, { ReactNode, useEffect } from "react";
+import useChatting from "@/app/_context/useChatting";
+import { useCurrUser } from "@/app/_context/useCurrUser";
+import { useSettings } from "@/app/_context/useSettings";
+import { useResize } from "@/app/_hooks/useResize";
+import { UserType } from "@/app/_types/userTypes";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import Chat from "../chat/Chat";
-import Details from "../details/Details";
-import { useCurrUser } from "@/app/_context/useCurrUser";
-import { useResize } from "@/app/_hooks/useResize";
-import { useSettings } from "@/app/_context/useSettings";
-import { useChatting } from "@/app/_context/useChatting";
+import List from "../list/List";
 
 interface WrapperTypes {
-  children: ReactNode;
   className?: string;
-  user: {
-    display_name: string;
-    email: string;
-    avatar_url: string;
-    status: string;
-    id: string;
-  };
+  user: UserType;
 }
 
 const WrapperComponent: React.FC<WrapperTypes> = function ({
-  children,
   className = "",
   user,
 }) {
   const { setUser } = useCurrUser();
   const { widthSize } = useResize();
   const { currRightWindow } = useSettings();
-  const { friend } = useChatting();
+  const { roomId } = useChatting();
 
   useEffect(function () {
     toast.success("Welcome :)");
   }, []);
 
+  const { email, fullName, image, bio, _id } = user;
+
   useEffect(
     function () {
       setUser({
-        email: user.email,
-        display_name: user.display_name,
-        avatar_url: user.avatar_url,
-        status: user.status,
+        email,
+        fullName,
+        image,
+        bio,
       });
     },
     [user, setUser],
@@ -50,13 +45,15 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
   if (widthSize === 875)
     return (
       <div className={className}>
-        {friend.friendName === "" && currRightWindow === "" && children}
-        {currRightWindow === "settings" && <Details widthSize={widthSize} />}
-        {friend.friendName !== "" &&
+        {currRightWindow === "" && <List />}
+        {/*
+        {currRightWindow === "settings" && <Details widthSize={widthSize} />}*/}
+        {roomId !== "" &&
           (currRightWindow === "" ? (
-            <Chat userId={user.id} />
+            <Chat userId={_id} />
           ) : (
-            <Details widthSize={widthSize} />
+            // <Details widthSize={widthSize} />
+            <></>
           ))}
       </div>
     );
@@ -64,20 +61,22 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
   if (widthSize === 1469)
     return (
       <div className={className}>
-        {children}
+        <List />
         {currRightWindow === "" ? (
-          <Chat userId={user.id} />
+          <Chat userId={_id} />
         ) : (
-          <Details widthSize={widthSize} />
+          // <Details widthSize={widthSize} />
+          <></>
         )}
       </div>
     );
 
   return (
     <div className={className}>
-      {children}
-      <Chat userId={user.id} />
-      <Details />
+      <List />
+      <Chat userId={_id} />
+      {/*
+      <Details /> */}
     </div>
   );
 };

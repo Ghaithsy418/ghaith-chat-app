@@ -30,19 +30,29 @@
     "dontHave": "أليس لديك حساب بعد؟",
     "signup": "سجل الآن",
     "or": "أو",
-    "loginGoogle": "سجل دخولك مع Google"
+    "loginGoogle": "سجل دخولك مع Google",
+    "emailVal": "رجاءً أدخل بريد إلكتروني صحيح",
+    "passwordVal": "كلمة المرور لا يجب أن تقل عن 8 أحرف"
   },
   "signup": {
     "title": "سجل حساب جديد",
     "subTitle": "رحلتك تبدأ هنا",
-    "name": "الاسم الكامل",
+    "firstName": "الاسم الأول",
+    "middleName": "الاسم الأوسط",
+    "lastName": "العائلة",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
     "signup": "تسجيل حساب جديد",
     "signupLoading": "جارٍ التسجيل",
     "haveAcc": "لديك حساب بالفعل؟",
     "login": "سجل دخولك الآن",
-    "or": "أو"
+    "or": "أو",
+    "emailVal": "رجاءً أدخل بريد إلكتروني صحيح",
+    "firstNameVal": "الاسم الأول قصير جداً",
+    "lastNameVal": "الاسم الأخير قصير جداً",
+    "passwordVal": "كلمة المرور لا يجب أن تقل عن 8 أحرف",
+    "passwordConfirmVal": "كلمات المرور غير متطابقة"
   },
   "settings": {
     "hoverColored": "المس البطاقة",

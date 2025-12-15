@@ -1,30 +1,24 @@
 "use client";
-import { useChatting } from "@/app/_context/useChatting";
+import { RoomTypes } from "@/app/_types/roomTypes";
 import ChatItem from "./ChatItem";
+import useChatting from "@/app/_context/useChatting";
 
-interface Friends {
-  id: string;
-  display_name: string;
-  avatar_url: string;
-  status: string;
-  isBlocked: boolean;
-  gotBlocked: boolean;
-}
-
-function ChatList({ friends }: { friends: Friends[] }) {
+function ChatList({ rooms }: { rooms: RoomTypes[] }) {
   const { search } = useChatting();
 
   const newArr =
     search === ""
-      ? friends
-      : friends.filter((friend) =>
-          friend.display_name
+      ? rooms
+      : rooms.filter((room) =>
+          room.otherUser.fullName
             .toLocaleLowerCase()
             .includes(search.toLowerCase()),
         );
   return (
     <div className="flex-4/5">
-      {newArr?.map((friend) => <ChatItem key={friend.id} friend={friend} />)}
+      {newArr?.map((room) => (
+        <ChatItem key={room._id} room={room} />
+      ))}
     </div>
   );
 }

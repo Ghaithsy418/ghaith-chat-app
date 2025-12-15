@@ -1,41 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useChatting } from "@/app/_context/useChatting";
-import InitialAvatar from "../ui/InitialAvatar";
+import useChatting from "@/app/_context/useChatting";
 import { useSettings } from "@/app/_context/useSettings";
-interface chatTypes {
-  friend: {
-    id: string;
-    avatar_url: string;
-    status: string;
-    display_name: string;
-    isBlocked: boolean;
-    gotBlocked: boolean;
-  };
-}
+import { RoomTypes } from "@/app/_types/roomTypes";
+import InitialAvatar from "../ui/InitialAvatar";
 
-function ChatItem(props: chatTypes) {
-  const { setFriend, friend } = useChatting();
+function ChatItem({ room }: { room: RoomTypes }) {
+  const { setFriend, friend, setRoomId } = useChatting();
   const { dispatch } = useSettings();
+
+  const { fullName, image, _id } = room.otherUser;
 
   return (
     <div
       onClick={() => {
         setFriend({
-          friendId: props.friend.id,
-          friendAvatar: props.friend.avatar_url,
-          friendName: props.friend.display_name,
-          friendStatus: props.friend.status,
-          isBlocked: props.friend.isBlocked,
-          gotBlocked: props.friend.gotBlocked,
+          friendId: _id,
+          friendImage: image || "",
+          friendName: fullName,
+          friendBio: "",
         });
+        setRoomId(room._id);
         dispatch({ type: "currWindowIs", payload: "" });
       }}
-      className={`flex cursor-pointer items-center gap-5 p-4 transition-all duration-300 not-last:border-b-1 not-last:border-indigo-100/30 hover:border-indigo-100/0 hover:bg-indigo-50/20 ${friend.friendId === props.friend.id ? "bg-indigo-200/20" : ""} `}
+      className={`flex cursor-pointer items-center gap-5 ${friend.friendId === _id ? "bg-indigo-200/20" : ""} border-b border-indigo-100/20 p-4 transition-all duration-300 first:border-t first:border-indigo-100/20 hover:border-indigo-100/0 hover:bg-indigo-50/20`}
     >
       <div>
-        {props.friend.avatar_url &&
+        {/* {props.friend.avatar_url &&
           !props.friend.isBlocked &&
           !props.friend.gotBlocked && (
             <img
@@ -47,18 +39,16 @@ function ChatItem(props: chatTypes) {
               alt={`avatar for ${props.friend.display_name}`}
               className="h-10 w-10 rounded-full object-cover"
             />
-          )}
-        {(!props.friend.avatar_url ||
-          props.friend.isBlocked ||
-          props.friend.gotBlocked) && (
+          )} */}
+        {!room.otherUser.image && (
           <InitialAvatar
-            name={props.friend.display_name}
+            name={room.otherUser.fullName}
             className="h-10 w-10 p-2 text-lg"
           />
         )}
       </div>
       <div className="flex flex-col justify-center">
-        <h2 className="text-md font-semibold">{props.friend.display_name}</h2>
+        <h2 className="text-md font-semibold">{room.otherUser.fullName}</h2>
       </div>
     </div>
   );

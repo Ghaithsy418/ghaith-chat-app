@@ -1,5 +1,3 @@
-import React from "react";
-
 function InitialAvatar({ className = "", name = "A" }) {
   return (
     <div

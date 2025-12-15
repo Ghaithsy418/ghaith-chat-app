@@ -48,8 +48,10 @@ function reducer(state: settingType, action: actionType) {
 }
 
 function SettingsProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, initialState as settingType);
-  const { currRightWindow, fontSize } = state;
+  const [{ currRightWindow, fontSize }, dispatch] = useReducer(
+    reducer,
+    initialState as settingType,
+  );
 
   return (
     <SettingsContext.Provider value={{ currRightWindow, fontSize, dispatch }}>

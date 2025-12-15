@@ -1,6 +1,6 @@
 "use client";
 
-import { useChatting } from "@/app/_context/useChatting";
+import useChatting from "@/app/_context/useChatting";
 import { useSettings } from "@/app/_context/useSettings";
 import { useLocale } from "next-intl";
 import { HiMiniArrowLongLeft, HiMiniArrowLongRight } from "react-icons/hi2";
@@ -14,10 +14,8 @@ function BackArrow() {
     setFriend({
       friendId: "",
       friendName: "",
-      friendStatus: friend.friendStatus,
-      friendAvatar: friend.friendAvatar,
-      isBlocked: friend.isBlocked,
-      gotBlocked: friend.gotBlocked,
+      friendBio: "",
+      friendImage: "",
     });
     dispatch({ type: "currWindowIs", payload: "" });
   }

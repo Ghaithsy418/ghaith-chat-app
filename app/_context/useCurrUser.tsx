@@ -10,25 +10,25 @@ import {
 } from "react";
 
 interface userTypes {
-  display_name: string;
+  fullName: string;
   email: string;
-  avatar_url: string;
-  status: string;
+  image: string;
+  bio: string;
 }
 
 interface contextTypes {
-  display_name: string;
+  fullName: string;
   email: string;
-  avatar_url: string;
-  status: string;
+  image: string;
+  bio: string;
   setUser: Dispatch<SetStateAction<userTypes | undefined>>;
 }
 
 const initialState = {
   email: "",
-  display_name: "",
-  avatar_url: "",
-  status: "",
+  fullName: "",
+  image: "",
+  bio: "",
   setUser: () => null,
 };
 
@@ -36,14 +36,14 @@ const userContext = createContext<contextTypes>(initialState);
 
 function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<userTypes>();
-  const { email, display_name, avatar_url, status } = user ?? initialState;
+  const { email, fullName, image, bio } = user ?? initialState;
   return (
     <userContext.Provider
       value={{
         email,
-        display_name,
-        avatar_url,
-        status,
+        fullName,
+        image,
+        bio,
         setUser,
       }}
     >

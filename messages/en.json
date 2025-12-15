@@ -30,19 +30,29 @@
     "dontHave": "Don't have an account?",
     "signup": "Signup",
     "or": "or",
-    "loginGoogle": "Login with Google"
+    "loginGoogle": "Login with Google",
+    "emailVal": "Please enter a valid email address",
+    "passwordVal": "Password must be at least 8 characters"
   },
   "signup": {
     "title": "Signup",
     "subTitle": "Your Journey will start here!",
-    "name": "Full Name",
+    "firstName": "First Name",
+    "middleName": "Middle Name",
+    "lastName": "Last Name",
     "email": "email",
     "password": "password",
+    "confirmPassword": "Confirm Password",
     "signup": "Sign up",
     "signupLoading": "Signing up...",
     "haveAcc": "You have an account?",
     "login": "Login",
-    "or": "or"
+    "or": "or",
+    "emailVal": "Please enter a valid email address",
+    "firstNameVal": "First name is too short",
+    "lastNameVal": "Last name is too short",
+    "passwordVal": "Password must be at least 8 characters",
+    "passwordConfirmVal": "Passwords do not match"
   },
   "settings": {
     "hoverColored": "Hover the Card",
