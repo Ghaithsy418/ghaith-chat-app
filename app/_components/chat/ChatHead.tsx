@@ -1,5 +1,5 @@
-import useChatting from "@/app/_context/useChatting";
 import { iconClassName } from "@/app/_helpers/classNames";
+import useChatting from "@/app/_store/useChatting";
 import { HiMiniPhone, HiMiniVideoCamera } from "react-icons/hi2";
 import InitialAvatarFriends from "../ui/InitialAvatarFriends";
 import ReusableImage from "../ui/ReusableAvatar";

@@ -77,8 +77,12 @@
   "updateWindow": {
     "updateTitle": "Update Profile",
     "email": "Email",
-    "fullName": "Full Name",
-    "status": "Status",
+    "firstName": "First Name",
+    "middleName": "Middle Name",
+    "lastName": "Last Name",
+    "phoneNumber": "Phone Number",
+    "password": "Password",
+    "bio": "Bio",
     "updateButton": "Update"
   },
   "copyright": {

@@ -1,13 +1,14 @@
 "use client";
 
-import useChatting from "@/app/_context/useChatting";
-import { useCurrUser } from "@/app/_context/useCurrUser";
-import { useSettings } from "@/app/_context/useSettings";
 import { useResize } from "@/app/_hooks/useResize";
+import useChatting from "@/app/_store/useChatting";
+import { useSettings } from "@/app/_store/useSettings";
+import { useUserStore } from "@/app/_store/useUser";
 import { UserType } from "@/app/_types/userTypes";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import Chat from "../chat/Chat";
+import Details from "../details/Details";
 import List from "../list/List";
 
 interface WrapperTypes {
@@ -19,7 +20,7 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
   className = "",
   user,
 }) {
-  const { setUser } = useCurrUser();
+  const setUser = useUserStore((state) => state.setUser);
   const { widthSize } = useResize();
   const { currRightWindow } = useSettings();
   const { roomId } = useChatting();
@@ -28,7 +29,7 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
     toast.success("Welcome :)");
   }, []);
 
-  const { email, fullName, image, bio, _id } = user;
+  const { email, fullName, image, bio, _id, phoneNumber } = user;
 
   useEffect(
     function () {
@@ -37,6 +38,8 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
         fullName,
         image,
         bio,
+        phoneNumber,
+        id: _id,
       });
     },
     [user, setUser],
@@ -45,15 +48,15 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
   if (widthSize === 875)
     return (
       <div className={className}>
-        {currRightWindow === "" && <List />}
-        {/*
-        {currRightWindow === "settings" && <Details widthSize={widthSize} />}*/}
+        {currRightWindow === "settings" && <Details widthSize={widthSize} />}
         {roomId !== "" &&
           (currRightWindow === "" ? (
-            <Chat userId={_id} />
+            <>
+              <List />
+              <Chat userId={_id} />
+            </>
           ) : (
-            // <Details widthSize={widthSize} />
-            <></>
+            <Details widthSize={widthSize} />
           ))}
       </div>
     );
@@ -65,8 +68,7 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
         {currRightWindow === "" ? (
           <Chat userId={_id} />
         ) : (
-          // <Details widthSize={widthSize} />
-          <></>
+          <Details widthSize={widthSize} />
         )}
       </div>
     );
@@ -75,8 +77,7 @@ const WrapperComponent: React.FC<WrapperTypes> = function ({
     <div className={className}>
       <List />
       <Chat userId={_id} />
-      {/*
-      <Details /> */}
+      <Details />
     </div>
   );
 };

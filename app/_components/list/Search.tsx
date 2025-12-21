@@ -1,5 +1,5 @@
 "use client";
-import useChatting from "@/app/_context/useChatting";
+import useChatting from "@/app/_store/useChatting";
 import { useTranslations } from "next-intl";
 import { HiSearch } from "react-icons/hi";
 

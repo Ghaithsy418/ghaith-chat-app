@@ -3,6 +3,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getToken } from "../_helpers/getToken";
 import { fetcher } from "../_lib/fetcher";
 import { UserType } from "../_types/userTypes";
 
@@ -58,4 +59,19 @@ export const signUp = async (body: SignupParams) => {
     return { success: false, message: err };
   }
   if (isSuccess) redirect("/");
+};
+
+export const logout = async () => {
+  const token = await getToken();
+
+  try {
+    await fetcher("DELETE", "/logout", token);
+
+    const cookieStore = await cookies();
+    cookieStore.delete("userToken");
+
+    return;
+  } catch (err) {
+    return { success: false, message: err };
+  }
 };

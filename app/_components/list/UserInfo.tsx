@@ -1,17 +1,18 @@
 "use client";
 
-import { useCurrUser } from "@/app/_context/useCurrUser";
-import { useSettings } from "@/app/_context/useSettings";
 import { iconClassName } from "@/app/_helpers/classNames";
+import { useSettings } from "@/app/_store/useSettings";
+import { useUserStore } from "@/app/_store/useUser";
 import { CgLogOut } from "react-icons/cg";
 import { HiOutlineCog6Tooth } from "react-icons/hi2";
 import GeneralMenu from "../ui/GeneralMenu";
 import InitialAvatar from "../ui/InitialAvatar";
 import ReusableImage from "../ui/ReusableAvatar";
+import Logout from "./Logout";
 
 const UserInfo = function () {
   const { currRightWindow, dispatch } = useSettings();
-  const { image, fullName } = useCurrUser();
+  const { image, fullName } = useUserStore((state) => state.user!);
 
   return (
     <div className="flex items-center justify-between">
@@ -42,9 +43,7 @@ const UserInfo = function () {
           }
           className={`${iconClassName} hover:-rotate-180`}
         />
-        <CgLogOut
-          className={`${iconClassName} hover:border-b-2 hover:border-b-red-500 hover:text-red-500`}
-        />
+        <Logout />
       </div>
     </div>
   );

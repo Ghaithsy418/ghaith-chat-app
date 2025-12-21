@@ -1,10 +1,9 @@
 "use client";
 
-import React from "react";
+import { useTranslations } from "next-intl";
 import { CgProfile } from "react-icons/cg";
 import Modal from "../../ui/Modal";
 import UpdateForm from "./UpdateForm";
-import { useTranslations } from "next-intl";
 
 function UpdateProfile() {
   const t = useTranslations("settings");

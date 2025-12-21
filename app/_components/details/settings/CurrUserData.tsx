@@ -1,19 +1,19 @@
 "use clinet";
 
-import { useCurrUser } from "@/app/_context/useCurrUser";
+import { useUserStore } from "@/app/_store/useUser";
+import { AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { LuSquareMousePointer } from "react-icons/lu";
 import UserAvatar from "./UserAvatar";
 import UserStatus from "./UserStatus";
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import { LuSquareMousePointer } from "react-icons/lu";
-import { useTranslations } from "next-intl";
 
 function CurrUserData() {
-  const { display_name, email } = useCurrUser();
+  const { fullName, email, bio } = useUserStore((state) => state.user!);
   const [isHover, setIsHover] = useState(false);
   const t = useTranslations("settings");
   return (
-    <div className="mb-4 flex flex-col items-center justify-center gap-5">
+    <div className="mb-4 flex flex-col items-center justify-center">
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
@@ -21,19 +21,21 @@ function CurrUserData() {
       >
         <UserAvatar />
         <div className="flex flex-col gap-1 rtl:text-end">
-          <h2 className="text-xl font-bold">{display_name}</h2>
+          <h2 className="text-lg font-bold">{fullName}</h2>
           <p className="text-xs tracking-wider text-slate-300/80">{email}</p>
         </div>
       </div>
       <div>
         <AnimatePresence mode="wait">
-          {isHover && <UserStatus />}
+          {isHover && bio && <UserStatus />}
         </AnimatePresence>
-        <p className="mt-3 flex items-center justify-center gap-2 transition-all duration-300">
-          <LuSquareMousePointer className="text-2xl text-rose-400" />
-          <span className="font-bold text-rose-400">{t("hoverColored")}</span>
-          {t("hoverText")}
-        </p>
+        {bio && (
+          <p className="mt-6 flex items-center justify-center gap-2 transition-all duration-300">
+            <LuSquareMousePointer className="text-2xl text-rose-400" />
+            <span className="font-bold text-rose-400">{t("hoverColored")}</span>
+            {t("hoverText")}
+          </p>
+        )}
       </div>
     </div>
   );

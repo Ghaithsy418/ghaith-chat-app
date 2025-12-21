@@ -1,5 +1,4 @@
 "use client";
-import { useChatting } from "@/app/_context/useChatting";
 import { iconClassName } from "@/app/_helpers/classNames";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 import React, { Dispatch, SetStateAction } from "react";
@@ -10,10 +9,8 @@ const EmojisPicker: React.FC<EmojiTypes> = function ({
   open,
   setOpen,
 }) {
-  const { friend } = useChatting();
-
   function handlePick(emoji: EmojiClickData) {
-    if (!friend.isBlocked) setText((text) => text + emoji.emoji);
+    setText((text) => text + emoji.emoji);
   }
 
   return (

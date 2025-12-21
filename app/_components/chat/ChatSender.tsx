@@ -1,11 +1,12 @@
 "use client";
 
-import { useChatting } from "@/app/_context/useChatting";
 import { iconClassName } from "@/app/_helpers/classNames";
-import { sendMessage } from "@/app/_lib/actions";
+import { useSendMutation } from "@/app/_hooks/clientHooks/useSendMutation";
+import { socket } from "@/app/_lib/connectSocket";
+import useChatting from "@/app/_store/useChatting";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useRef, useState, useTransition } from "react";
+import { FormEvent, useRef, useState } from "react";
 import {
   HiOutlineCamera,
   HiOutlineMicrophone,
@@ -15,41 +16,32 @@ import {
 import { RiSendPlaneFill } from "react-icons/ri";
 import EmojisPicker from "./EmojisPicker";
 
-function ChatSender({
-  addMessage,
-  userId,
-}: {
-  addMessage: (action: unknown) => void;
+interface ChatSenderProps {
   userId: string;
-}) {
+}
+
+function ChatSender({ userId }: ChatSenderProps) {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
-  const [isPending, startTransition] = useTransition();
-  const { friend } = useChatting();
-  const inputFocus = useRef<HTMLInputElement>(null);
+  const { roomId } = useChatting();
+  const { sendMessageMutation } = useSendMutation(roomId, userId);
   const t = useTranslations("sendingMessages");
+  const inputFocus = useRef<HTMLInputElement>(null);
+
+  function handleSend(e: FormEvent<HTMLFormElement>) {
+    if (!socket || !roomId) return;
+    e.preventDefault();
+    sendMessageMutation({
+      content: text,
+      sender: userId,
+      chatRoomId: roomId,
+    });
+    setText("");
+  }
 
   return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        if (text !== "") {
-          setText("");
-          startTransition(async () => {
-            setOpen(false);
-            addMessage({
-              text,
-              created_at: Date.now() + 1,
-              send_by: userId,
-              send_to: friend,
-              is_edit: false,
-            });
-            await sendMessage(text, friend.friendId);
-          });
-        }
-      }}
-    >
-      <div className="flex h-16 items-center gap-3 border-t-1 border-indigo-100/30 bg-slate-950/30 px-5 transition-all duration-300 sm:gap-5">
+    <form onSubmit={handleSend}>
+      <div className="flex h-16 items-center gap-3 border-t border-indigo-100/30 bg-slate-950/30 px-5 transition-all duration-300 sm:gap-5">
         <EmojisPicker setText={setText} open={open} setOpen={setOpen} />
         <input
           type="text"
@@ -57,7 +49,6 @@ function ChatSender({
           placeholder={t("placeholder")}
           className="h-full flex-1 border-0 p-2 text-lg focus:border-0 focus:outline-0 disabled:cursor-not-allowed rtl:placeholder:tracking-wider"
           value={text}
-          disabled={isPending || friend.isBlocked || friend.gotBlocked}
           onChange={(e) => setText(e.target.value)}
           onClick={() => setOpen(false)}
         />
@@ -67,7 +58,7 @@ function ChatSender({
           <HiOutlineMicrophone className={`${iconClassName} hidden sm:block`} />
           <HiOutlinePaperClip className={`${iconClassName} block sm:hidden`} />
         </div>
-        {text && !friend.isBlocked && (
+        {text && (
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 1 } }}

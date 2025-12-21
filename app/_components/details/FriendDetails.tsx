@@ -1,12 +1,12 @@
-import { useChatting } from "@/app/_context/useChatting";
 import { blockUser } from "@/app/_lib/actions";
+import { useChatting } from "@/app/_store/useChatting";
 import { useTranslations } from "next-intl";
+import { useTransition } from "react";
 import ChatSettings from "./ChatSettings";
 import PrivacyAndHelp from "./PrivacyAndHelp";
 import SharedFiles from "./SharedFiles";
 import SharedPhotos from "./SharedPhotos";
 import UserDetails from "./UserDetails";
-import { useTransition } from "react";
 
 function FriendDetails() {
   const t = useTranslations("userInfos");

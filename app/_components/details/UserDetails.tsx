@@ -1,6 +1,5 @@
 "use client";
-import { useChatting } from "@/app/_context/useChatting";
-import React from "react";
+import { useChatting } from "@/app/_store/useChatting";
 import InitialAvatar from "../ui/InitialAvatar";
 import ReusableImage from "../ui/ReusableAvatar";
 

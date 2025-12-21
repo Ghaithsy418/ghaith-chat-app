@@ -1,6 +1,6 @@
 "use client";
 
-import { useSettings } from "@/app/_context/useSettings";
+import { useSettings } from "@/app/_store/useSettings";
 import Cookie from "js-cookie";
 import { useTranslations } from "next-intl";
 

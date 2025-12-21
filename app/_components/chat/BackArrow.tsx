@@ -1,7 +1,7 @@
 "use client";
 
-import useChatting from "@/app/_context/useChatting";
-import { useSettings } from "@/app/_context/useSettings";
+import useChatting from "@/app/_store/useChatting";
+import { useSettings } from "@/app/_store/useSettings";
 import { useLocale } from "next-intl";
 import { HiMiniArrowLongLeft, HiMiniArrowLongRight } from "react-icons/hi2";
 

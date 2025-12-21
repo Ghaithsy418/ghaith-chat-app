@@ -4,8 +4,7 @@ import { getLocale } from "next-intl/server";
 import { Cabin, Vazirmatn } from "next/font/google";
 import { cookies } from "next/headers";
 import { Toaster } from "react-hot-toast";
-import { UserProvider } from "./_context/useCurrUser";
-import { SettingsProvider } from "./_context/useSettings";
+import { SettingsProvider } from "./_store/useSettings";
 import "./globals.css";
 
 const cabin = Cabin({
@@ -45,9 +44,7 @@ export default async function RootLayout({
         className={`${locale === "ar" ? vazirmatn.className : cabin.className} bg-background flex h-screen items-center justify-center bg-cover bg-center text-gray-100 antialiased sm:h-screen`}
       >
         <NextIntlClientProvider locale={locale}>
-          <UserProvider>
-            <SettingsProvider>{children}</SettingsProvider>
-          </UserProvider>
+          <SettingsProvider>{children}</SettingsProvider>
         </NextIntlClientProvider>
         <Toaster
           gutter={8}

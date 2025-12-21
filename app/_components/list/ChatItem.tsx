@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import useChatting from "@/app/_context/useChatting";
-import { useSettings } from "@/app/_context/useSettings";
+import useChatting from "@/app/_store/useChatting";
+import { useSettings } from "@/app/_store/useSettings";
 import { RoomTypes } from "@/app/_types/roomTypes";
 import InitialAvatar from "../ui/InitialAvatar";
 

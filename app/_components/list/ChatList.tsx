@@ -1,7 +1,7 @@
 "use client";
+import useChatting from "@/app/_store/useChatting";
 import { RoomTypes } from "@/app/_types/roomTypes";
 import ChatItem from "./ChatItem";
-import useChatting from "@/app/_context/useChatting";
 
 function ChatList({ rooms }: { rooms: RoomTypes[] }) {
   const { search } = useChatting();

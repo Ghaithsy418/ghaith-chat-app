@@ -1,6 +1,6 @@
 "use client";
 
-import useChatting from "@/app/_context/useChatting";
+import useChatting from "@/app/_store/useChatting";
 
 function InitialAvatarFriends({ className = "" }) {
   const { friend } = useChatting();

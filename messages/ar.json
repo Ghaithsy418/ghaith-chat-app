@@ -77,8 +77,12 @@
   "updateWindow": {
     "updateTitle": "تعديل الملف الشخصي",
     "email": "البريد الإلكتروني",
-    "fullName": "الاسم الكامل",
-    "status": "الحالة",
+    "firstName": "الاسم الأول",
+    "middleName": "الاسم الأوسط",
+    "lastName": "اسم العائلة",
+    "password": "كلمة المرور",
+    "phoneNumber": "رقم الهاتف",
+    "bio": "الحالة",
     "updateButton": "تعديل"
   },
   "copyright": {

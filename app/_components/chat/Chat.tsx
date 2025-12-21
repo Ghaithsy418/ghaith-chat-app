@@ -1,14 +1,32 @@
 "use client";
 
-import useChatting from "@/app/_context/useChatting";
 import { useGetMessages } from "@/app/_hooks/clientHooks/useGetMessages";
+import { socket } from "@/app/_lib/connectSocket";
+import useChatting from "@/app/_store/useChatting";
+import { useEffect } from "react";
 import Spinner from "../ui/Spinner";
 import ChatContainer from "./ChatContainer";
 import ChatHead from "./ChatHead";
+import ChatSender from "./ChatSender";
 
 function Chat({ userId }: { userId: string }) {
   const { friend, roomId } = useChatting();
-  const { data: messages, isLoading, error } = useGetMessages(roomId);
+  const { data: messages, isLoading } = useGetMessages(roomId);
+
+  useEffect(
+    function () {
+      if (!socket || !roomId) return;
+
+      socket.emit("join_room", roomId);
+
+      return () => {
+        socket?.emit("leave_room", roomId);
+      };
+    },
+    [roomId],
+  );
+
+  if (!roomId || !socket) return;
 
   return (
     <div className="flex h-full w-full flex-2 flex-col">
@@ -31,9 +49,9 @@ function Chat({ userId }: { userId: string }) {
           {isLoading ? (
             <Spinner className="mx-auto my-auto" />
           ) : (
-            <ChatContainer messages={messages} />
+            <ChatContainer messages={messages} roomId={roomId} />
           )}
-          {/* <ChatSender addMessage={addMessage} userId={userId} /> */}
+          <ChatSender userId={userId} />
         </>
       )}
     </div>

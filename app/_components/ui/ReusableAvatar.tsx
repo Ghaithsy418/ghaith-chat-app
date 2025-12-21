@@ -7,13 +7,10 @@ interface imageTypes {
 }
 
 function ReusableImage({ image, fullName, className = "" }: imageTypes) {
+  console.log(image)
   return (
     <img
-      src={
-        process.env.NEXT_PUBLIC_SUPABASE_URL +
-        "/storage/v1/object/public/avatars//" +
-        image
-      }
+      src={image}
       alt={`avatar for ${fullName}`}
       className={`rounded-full object-cover ${className}`}
     />

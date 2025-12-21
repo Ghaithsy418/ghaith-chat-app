@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import useChatting from "@/app/_context/useChatting";
+import useChatting from "@/app/_store/useChatting";
 import { format } from "date-fns";
 import React, { ReactNode } from "react";
 import InitialAvatarFriends from "../ui/InitialAvatarFriends";

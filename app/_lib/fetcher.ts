@@ -1,5 +1,8 @@
+"use server";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
+import { redirect } from "next/navigation";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/api/v1",
@@ -22,6 +25,11 @@ export const fetcher = async <T>(
 
     return response.data?.data as T;
   } catch (error: any) {
+    const { status, statusText } = error.response;
+
+    if (status === 401 || statusText === "Unauthorized") {
+      redirect("/login");
+    }
     throw error.response?.data?.message || error.message;
   }
 };
